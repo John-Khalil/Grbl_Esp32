@@ -82,6 +82,11 @@ class consoleLogger{
 
 
     public:
+
+        void addConsole(const std::function<void(unsigned char*,unsigned char)>newCallBack){
+            consoleFeedback.push_back(newCallBack);
+            return;
+        }
        
         void disableNL(void){
             autoNLCR=0;
@@ -164,3 +169,5 @@ class consoleLogger{
 
 		
 };
+
+consoleLogger console;
