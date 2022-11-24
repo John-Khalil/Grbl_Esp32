@@ -6,26 +6,13 @@
 class consoleLogger{
 
     std::vector<std::function<void(unsigned char*,unsigned char)>>consoleFeedback;
+    /*
+        *the main idea here is to have a list of call back function that have the real data logger
+        *all what is required to setup the predefined instance is to add the callback function like serial print, network logger
+        ~both functional and vector shoudl be included from the standard  library 
 
-    // void (*_clkPin)(unsigned char);
-    // void (*_dataPin)(unsigned char);
-    // void (*_Delay_us)(unsigned long);
-    // unsigned char (*_syncPin)(void);
+    */
 
-    std::function<void(unsigned char)>_clkPin;
-    std::function<void(unsigned char)>_dataPin;
-    std::function<unsigned char(void)>_syncPin;
-    std::function<void(unsigned long)>_Delay_us;
-
-    std::function<void(unsigned char)>_clkPinChangeDirection;
-    std::function<void(unsigned char)>_dataPinChangeDirection;
-    std::function<unsigned char(void)>_clkPinRead;
-    std::function<unsigned char(void)>_dataPinRead;
-
-    std::function<void(unsigned char*,unsigned char)>_consoleFeedback;
-
-
-    float _clkSpeed=0;
 
     unsigned char autoNLCR=1;
 
@@ -70,7 +57,7 @@ class consoleLogger{
     unsigned char *mainLogger(unsigned char *consoleData){
         unsigned short consoleFeedBackCounter=consoleFeedback.size();
         while(consoleFeedBackCounter--)
-            consoleFeedback[consoleFeedBackCounter](consoleData,autoNLCR);
+            consoleFeedback[consoleFeedBackCounter](consoleData,autoNLCR);      // passing the data to callback function in the list
         return consoleData;
     }
 
@@ -84,7 +71,7 @@ class consoleLogger{
     public:
 
         void addConsole(const std::function<void(unsigned char*,unsigned char)>newCallBack){
-            consoleFeedback.push_back(newCallBack);
+            consoleFeedback.push_back(newCallBack);                                             // adding to the call back list
             return;
         }
        
@@ -94,6 +81,8 @@ class consoleLogger{
         void enableNL(void){
             autoNLCR=1;
         }
+
+        //~ creating overloaded functions to handle any data type
 
         unsigned char *log(unsigned char *consoleData){
             return mainLogger(consoleData);
@@ -156,7 +145,7 @@ class consoleLogger{
 
         }
 
-        template<typename T,typename... Types>
+        template<typename T,typename... Types>      // creating a template that can have unlimited number of args to be printed
         void log(T arg1,Types... arg2){
             disableNL();
             log(arg1);
@@ -170,4 +159,4 @@ class consoleLogger{
 		
 };
 
-consoleLogger console;
+consoleLogger console;          // predefined class instance that could be used globally 
