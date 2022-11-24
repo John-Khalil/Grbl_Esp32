@@ -50,7 +50,7 @@ class consoleLogger{
     unsigned char* longToString(int64_t num){
         unsigned char *signedStr=inttostring((num<0)?(num*-1):num);
         if(num<0)
-            *(--signedStr)=0x2D;
+            *(--signedStr)=0x2D;        // '-' sign
         return signedStr;
     }
 
@@ -82,7 +82,8 @@ class consoleLogger{
             autoNLCR=1;
         }
 
-        //~ creating overloaded functions to handle any data type
+        // creating overloaded functions to handle any data type
+        //? check this blog post for more details <https://www.geeksforgeeks.org/function-overloading-c/#:~:text=Function%20overloading%20is%20a%20feature,it%20is%20called%20Function%20Overloading.>
 
         unsigned char *log(unsigned char *consoleData){
             return mainLogger(consoleData);
@@ -139,13 +140,14 @@ class consoleLogger{
              
         }
 
-
+        // creating a template that can have unlimited number of args to be printed
+        //? check this blog post for more details <https://www.geeksforgeeks.org/variadic-function-templates-c/#:~:text=Variadic%20templates%20are%20class%20or,help%20to%20overcome%20this%20issue.>
 
         void log(void){
 
         }
 
-        template<typename T,typename... Types>      // creating a template that can have unlimited number of args to be printed
+        template<typename T,typename... Types>      
         void log(T arg1,Types... arg2){
             disableNL();
             log(arg1);
@@ -159,4 +161,4 @@ class consoleLogger{
 		
 };
 
-consoleLogger console;          // predefined class instance that could be used globally 
+consoleLogger console;          //^ predefined class instance that could be used globally 
