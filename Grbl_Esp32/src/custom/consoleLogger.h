@@ -6,6 +6,36 @@
 #include <functional>
 #include <vector>
 
+// class consoleLogger{
+//     public:
+//         std::vector<std::function<void(unsigned char*,unsigned char)>>consoleFeedback;
+//         unsigned char autoNLCR;
+//         unsigned short CLR_LENGTH;
+//         unsigned char * CLR(unsigned char *deletedString,unsigned short _CLR_LENGTH=0);
+//         unsigned char GLOBAL_64_BIT_INT_TO_STRING[21];
+//         unsigned char* inttostring(uint64_t num);
+//         unsigned char* longToString(int64_t num);
+//         unsigned char *mainLogger(unsigned char *consoleData);
+//         void addConsole(const std::function<void(unsigned char*,unsigned char)>newCallBack);
+//         void disableNL(void);
+//         void enableNL(void);
+//         unsigned char *log(unsigned char *consoleData);
+//         unsigned char *log(char *consoleData);
+//         unsigned char *log(const char *consoleData);
+//         unsigned char *log(unsigned long consoleData);
+//         unsigned char *log(unsigned short consoleData);
+//         unsigned char *log(unsigned char consoleData);
+//         unsigned char *log(long consoleData);
+//         unsigned char *log(short consoleData);
+//         unsigned char *log(char consoleData);
+//         unsigned char *log(double consoleData);
+//         void log(void);
+//         template<typename T,typename... Types>      
+//         void log(T arg1,Types... arg2);
+
+// };
+
+
 class consoleLogger{
     public:
 
@@ -147,6 +177,10 @@ class consoleLogger{
         }
 
 };
+
+
+
+
 
 
 extern consoleLogger console;          //^ predefined class instance that could be used globally 
