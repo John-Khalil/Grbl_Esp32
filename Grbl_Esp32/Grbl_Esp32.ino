@@ -21,8 +21,6 @@
 #include "src/Grbl.h"
 #include "src/custom/consoleLogger.h"
 
-// consoleLogger console;
-
 void setup() {
     Serial2.begin(115200);
     console.addConsole([&](unsigned char *cosnoleData,unsigned char autoNLCR){
