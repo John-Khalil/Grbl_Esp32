@@ -1,3 +1,6 @@
+#ifndef consoleLogger_h
+#define consoleLogger_h
+
 #include <stdint.h>
 #include <cstdlib>
 #include <functional>
@@ -147,3 +150,7 @@ class consoleLogger{
 
 
 extern consoleLogger console;          //^ predefined class instance that could be used globally 
+
+
+#endif
+

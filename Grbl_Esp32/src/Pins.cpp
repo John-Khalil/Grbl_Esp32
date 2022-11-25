@@ -17,7 +17,7 @@ String pinName(uint8_t pin) {
 // the weak aliases in the library to apply, because of
 // the UNDEFINED_PIN check.  That UNDEFINED_PIN behavior
 // cleans up other code by eliminating ifdefs and checks.
-void IRAM_ATTR digitalWrite(uint8_t pin, uint8_t val) {
+void IRAM_ATTR digitalWrite(uint8_t pin, uint8_t val) {    
     if (pin == UNDEFINED_PIN) {
         return;
     }
@@ -31,6 +31,7 @@ void IRAM_ATTR digitalWrite(uint8_t pin, uint8_t val) {
 }
 
 void IRAM_ATTR pinMode(uint8_t pin, uint8_t mode) {
+    // console.log("Pin >> ",(unsigned long)pin," -- ",(unsigned long)mode);
     if (pin == UNDEFINED_PIN) {
         return;
     }
