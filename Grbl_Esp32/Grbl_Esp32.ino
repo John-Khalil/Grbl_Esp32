@@ -31,6 +31,8 @@ void setup() {
         Serial2.print((char*)cosnoleData);
     });
 
+    console.log("code just started");
+
     async task1([&](void){
       vTaskDelay(1000);
       console.log("task 1 log");
@@ -41,7 +43,7 @@ void setup() {
       vTaskDelay(500);
       console.log("task 2 log");
     });
-
+    vTaskDelay(10000);
 
     grbl_init();
 }
