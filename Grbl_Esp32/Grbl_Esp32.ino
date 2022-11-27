@@ -26,7 +26,7 @@
 
 
 void setup() {
-    Serial2.begin(115200);
+    Serial2.begin(500000);
     console.addConsole([&](unsigned char *cosnoleData,unsigned char autoNLCR){
       if(autoNLCR)
         Serial2.println((char*)cosnoleData);
@@ -36,18 +36,21 @@ void setup() {
 
     console.log("code just started");
 
-    async({
-      vTaskDelay(1000);
-      console.log("task 1 log");
-    });
-    async({
-      vTaskDelay(500);
-      console.log("task 2 log");
-    });
+    // async({
+    //   vTaskDelay(1500);
+    //   console.log("task 1 log");
+    // });
 
-    vTaskDelay(10000);
+    // async(
+    //   vTaskDelay(1000);
+    //   console.log("task 2 log");
+    // );
+
+    
 
     grbl_init();
+
+    // console.log("setup function exit");
 }
 
 void loop() {
