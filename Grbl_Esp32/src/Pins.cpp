@@ -36,7 +36,7 @@ void IRAM_ATTR digitalWrite(uint8_t pin, uint8_t val) {
 
     // });
     
-    vTaskDelay(100);        //! manually throttling the main thread this really expalins the weird behaviour 
+    // vTaskDelay(100);        //! manually throttling the main thread this really expalins the weird behaviour 
 
     // task 1
     async({                 //! this thread would luch normally after manually introducing the bottle-neck cause it gives it enough time to terminate
@@ -45,11 +45,11 @@ void IRAM_ATTR digitalWrite(uint8_t pin, uint8_t val) {
     });
 
     // task 2
-    async(                  //! this would lunch only once, showing the same thread will only lunch after the old instance is terminated 
-        console.log("feedBack");
-        vTaskDelay(5000);
-        console.log("final value ->> ",time);
-    );
+    // async(                  //! this would lunch only once, showing the same thread will only lunch after the old instance is terminated 
+    //     console.log("feedBack");
+    //     vTaskDelay(5000);
+    //     console.log("final value ->> ",time);
+    // );
     //^ both task 1 & 2 should be lunched the exact numebr of time as the function gets called (some one trying to change any output pin state)
 
     console.log(time,"-",micros()," -- ",callCount++);
