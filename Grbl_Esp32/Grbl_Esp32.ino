@@ -20,7 +20,10 @@
 
 #include "src/Grbl.h"
 #include "src/custom/consoleLogger.h"
+#include <functional>
 #include "src/custom/async.cpp"
+
+
 
 void setup() {
     Serial2.begin(115200);
@@ -33,16 +36,15 @@ void setup() {
 
     console.log("code just started");
 
-    async task1([&](void){
+    async({
       vTaskDelay(1000);
       console.log("task 1 log");
     });
-
-    
-    async task2([&](void){
+    async({
       vTaskDelay(500);
       console.log("task 2 log");
     });
+
     vTaskDelay(10000);
 
     grbl_init();

@@ -32,7 +32,7 @@ void IRAM_ATTR digitalWrite(uint8_t pin, uint8_t val) {
 }
 
 void IRAM_ATTR pinMode(uint8_t pin, uint8_t mode) {
-    console.log("Pin >> ",(unsigned long)pin," -- ",(unsigned long)mode);
+    // console.log("Pin >> ",(unsigned long)pin," -- ",(unsigned long)mode);
     if (pin == UNDEFINED_PIN) {
         return;
     }
