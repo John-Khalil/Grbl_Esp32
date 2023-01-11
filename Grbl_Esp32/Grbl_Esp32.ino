@@ -36,10 +36,13 @@ void setup() {
 
     console.log("code just started");
 
-    // async({
-    //   vTaskDelay(1500);
-    //   console.log("task 1 log");
-    // });
+    async({
+      while(1){
+        vTaskDelay(1500);
+        console.log("task 1 log");
+      }
+      
+    });
 
     // async(
     //   vTaskDelay(1000);
