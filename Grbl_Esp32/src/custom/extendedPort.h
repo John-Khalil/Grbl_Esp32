@@ -59,6 +59,11 @@ class extendedPort{
             return *this;
         }
 
+        extendedPort &write(uint64_t _outputValue){
+            outputValue=_outputValue;
+            return write();
+        }
+
         extendedPort &passThrough(const std::function<void(uint16_t,uint8_t,uint64_t)>passThroughCallback){
             outputPassthrough.push_back(passThroughCallback);
             return *this;
