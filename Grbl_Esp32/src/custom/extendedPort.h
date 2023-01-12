@@ -19,6 +19,9 @@ class extendedPort{
 
         float delayTime=0;
         float halfDelayTime=0;
+
+        uint16_t pinNumber=-1;
+        uint8_t pinState=-1;
     public:
         uint32_t clockSpeed=0;
         uint8_t portSize=0;
@@ -47,6 +50,12 @@ class extendedPort{
             latchPin(1);
             delay_us(delayTime);
 
+            unsigned char pathThroughCounter=outputPassthrough.size();
+            while(pathThroughCounter--)
+                outputPassthrough[pathThroughCounter](pinNumber,pinState,outputValue);
+
+            pinNumber=-1;
+            pinState=-1;
             return *this;
         }
 
