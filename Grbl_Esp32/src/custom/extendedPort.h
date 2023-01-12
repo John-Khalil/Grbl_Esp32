@@ -18,8 +18,25 @@ class extendedPort{
         uint32_t clockSpeed=0;
         uint8_t portSize=0;
         uint64_t outputValue=0;
+
+        float delayTime=0;
+        float halfDelayTime=0;
     public:
-        
+        extendedPort &write(void){
+            uint8_t loopCounter=portSize;
+            while(loopCounter--){
+                dataPin((outputValue>>loopCounter)&0x01);
+                delay_us(halfDelayTime);
+                clkPin(1);
+                delay_us(delayTime);
+                clkPin(0);
+                delay_us(halfDelayTime);
+            }
+            latchPin(1);
+            delay_us(delayTime);
+
+            return *this;
+        }
 
         void setup(
             const std::function<void(unsigned char)>&_clkPin,
@@ -37,6 +54,10 @@ class extendedPort{
             clockSpeed=_clockSpeed;
             portSize=_portSize;
             outputValue=_outputValue;
+            delayTime=1000000.0/(float)clockSpeed;
+            halfDelayTime=delayTime/2.0;
+
+            write();
         }
 };
 
