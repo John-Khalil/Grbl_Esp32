@@ -50,12 +50,17 @@ class extendedPort{
             latchPin(1);
             delay_us(delayTime);
 
-            unsigned char pathThroughCounter=outputPassthrough.size();
-            while(pathThroughCounter--)
-                outputPassthrough[pathThroughCounter](pinNumber,pinState,outputValue);
+            unsigned char passThroughCounter=outputPassthrough.size();
+            while(passThroughCounter--)
+                outputPassthrough[passThroughCounter](pinNumber,pinState,outputValue);
 
             pinNumber=-1;
             pinState=-1;
+            return *this;
+        }
+
+        extendedPort &passThrough(const std::function<void(uint16_t,uint8_t,uint64_t)>passThroughCallback){
+            outputPassthrough.push_back(passThroughCallback);
             return *this;
         }
 
