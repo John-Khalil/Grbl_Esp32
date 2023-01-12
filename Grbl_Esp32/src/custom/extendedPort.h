@@ -64,6 +64,16 @@ class extendedPort{
             return write();
         }
 
+        extendedPort &write(uint16_t _pinNumber,uint8_t _pinState){
+            pinNumber=_pinNumber;
+            pinState=_pinState;
+            if(pinState)
+                outputValue|=(1<<_pinNumber);
+            else
+                outputValue&=~(1<<_pinNumber);
+            return write();
+        }
+
         extendedPort &passThrough(const std::function<void(uint16_t,uint8_t,uint64_t)>passThroughCallback){
             outputPassthrough.push_back(passThroughCallback);
             return *this;
