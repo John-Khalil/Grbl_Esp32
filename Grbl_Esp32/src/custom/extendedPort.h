@@ -15,13 +15,25 @@ class extendedPort{
         std::function<void(float)>delay_us;
         std::vector<std::function<void(uint16_t,uint8_t,uint64_t)>>outputPassthrough;
 
-        uint32_t clockSpeed=0;
-        uint8_t portSize=0;
-        uint64_t outputValue=0;
+        
 
         float delayTime=0;
         float halfDelayTime=0;
     public:
+        uint32_t clockSpeed=0;
+        uint8_t portSize=0;
+        uint64_t outputValue=0;
+
+        extendedPort &setClockSpeed(uint32_t _clockSpeed){
+            clockSpeed=_clockSpeed;
+            delayTime=1000000.0/(float)clockSpeed;
+            halfDelayTime=delayTime/2.0;
+            return *this;
+        }
+
+
+
+
         extendedPort &write(void){
             uint8_t loopCounter=portSize;
             while(loopCounter--){
@@ -51,9 +63,11 @@ class extendedPort{
             dataPin=_dataPin;
             latchPin=_latchPin;
             delay_us=_delay_us;
-            clockSpeed=_clockSpeed;
+
             portSize=_portSize;
             outputValue=_outputValue;
+
+            clockSpeed=_clockSpeed;
             delayTime=1000000.0/(float)clockSpeed;
             halfDelayTime=delayTime/2.0;
 
