@@ -49,6 +49,7 @@ class extendedPort{
             }
             latchPin(1);
             delay_us(delayTime);
+            latchPin(0);
 
             unsigned char passThroughCounter=outputPassthrough.size();
             while(passThroughCounter--)

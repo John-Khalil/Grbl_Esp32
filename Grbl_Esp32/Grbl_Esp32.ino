@@ -66,12 +66,16 @@ void setup() {
         outputRegisterLowClear|=(1<<shiftRegisterLatchPin);
     },
     [&](float microSec){
-
+      
     });
 
     async({
+      uint8_t blinker=0;
       while(1){
-        spiPort.write(spiPort.outputValue^((1<<shiftRegisterClkPin)|(1<<shiftRegisterDataPin)|(1<<shiftRegisterLatchPin)));
+        // spiPort.write(spiPort.outputValue^((1<<shiftRegisterClkPin)|(1<<shiftRegisterDataPin)|(1<<shiftRegisterLatchPin)));
+        spiPort.write(spiPort.outputValue^255);
+
+        spiPort.write(15,blinker^=255);
         // outputRegisterLowSet|=(1<<shiftRegisterClkPin);
         // outputRegisterLowSet|=(1<<shiftRegisterDataPin);
         // outputRegisterLowSet|=(1<<shiftRegisterLatchPin);
