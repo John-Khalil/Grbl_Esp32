@@ -38,21 +38,49 @@ void setup() {
 
     console.log("code just started");
 
-    _PM(27,OUTPUT);
-    _PM(14,OUTPUT);
-    _PM(12,OUTPUT);
+    #define shiftRegisterClkPin 27
+    #define shiftRegisterDataPin 14
+    #define shiftRegisterLatchPin 12
+
+
+    _PM(shiftRegisterClkPin,OUTPUT);
+    _PM(shiftRegisterDataPin,OUTPUT);
+    _PM(shiftRegisterLatchPin,OUTPUT);
+
+    spiPort.setup([&](uint8_t clkPin){
+      if(clkPin)
+        outputRegisterLowSet|=(1<<shiftRegisterClkPin);
+      else
+        outputRegisterLowClear|=(1<<shiftRegisterClkPin);
+    },
+    [&](uint8_t dataPin){
+      if(dataPin)
+        outputRegisterLowSet|=(1<<shiftRegisterDataPin);
+      else
+        outputRegisterLowClear|=(1<<shiftRegisterDataPin);
+    },
+    [&](uint8_t latchPin){
+      if(latchPin)
+        outputRegisterLowSet|=(1<<shiftRegisterLatchPin);
+      else
+        outputRegisterLowClear|=(1<<shiftRegisterLatchPin);
+    },
+    [&](float microSec){
+
+    });
 
     async({
       while(1){
-        outputRegisterLowSet|=(1<<27);
-        outputRegisterLowSet|=(1<<14);
-        outputRegisterLowSet|=(1<<12);
+        spiPort.write(spiPort.outputValue^((1<<shiftRegisterClkPin)|(1<<shiftRegisterDataPin)|(1<<shiftRegisterLatchPin)));
+        // outputRegisterLowSet|=(1<<shiftRegisterClkPin);
+        // outputRegisterLowSet|=(1<<shiftRegisterDataPin);
+        // outputRegisterLowSet|=(1<<shiftRegisterLatchPin);
 
-        vTaskDelay(1500);
-        outputRegisterLowClear|=(1<<27);
-        outputRegisterLowClear|=(1<<14);
-        outputRegisterLowClear|=(1<<12);
-        vTaskDelay(1500);
+        vTaskDelay(500);
+        // outputRegisterLowClear|=(1<<shiftRegisterClkPin);
+        // outputRegisterLowClear|=(1<<shiftRegisterDataPin);
+        // outputRegisterLowClear|=(1<<shiftRegisterLatchPin);
+        // vTaskDelay(1500);
 
 
       }
