@@ -24,6 +24,7 @@
 #include "src/custom/async.cpp"
 #include "src/custom/extendedPort.h"
 #include "src/custom/esp32basics.h"
+#include "src/Pins.h"
 
 
 void setup() {
@@ -36,6 +37,26 @@ void setup() {
     });
 
     console.log("code just started");
+
+    _PM(27,OUTPUT);
+    _PM(14,OUTPUT);
+    _PM(12,OUTPUT);
+
+    async({
+      while(1){
+        outputRegisterLowSet|=(1<<27);
+        outputRegisterLowSet|=(1<<14);
+        outputRegisterLowSet|=(1<<12);
+
+        vTaskDelay(1500);
+        outputRegisterLowClear|=(1<<27);
+        outputRegisterLowClear|=(1<<14);
+        outputRegisterLowClear|=(1<<12);
+        vTaskDelay(1500);
+
+
+      }
+    });
 
     // async({
     //   while(1){
