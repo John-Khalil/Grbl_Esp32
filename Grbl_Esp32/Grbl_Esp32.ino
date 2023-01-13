@@ -22,7 +22,8 @@
 #include "src/custom/consoleLogger.h"
 #include <functional>
 #include "src/custom/async.cpp"
-
+#include "src/custom/extendedPort.h"
+#include "src/custom/esp32basics.h"
 
 
 void setup() {
@@ -36,13 +37,13 @@ void setup() {
 
     console.log("code just started");
 
-    async({
-      while(1){
-        vTaskDelay(1500);
-        console.log("task 1 log");
-      }
+    // async({
+    //   while(1){
+    //     vTaskDelay(1500);
+    //     console.log("task 1 log");
+    //   }
       
-    });
+    // });
 
     // async(
     //   vTaskDelay(1000);
