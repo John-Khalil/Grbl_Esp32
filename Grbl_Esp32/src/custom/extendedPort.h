@@ -25,7 +25,7 @@ class extendedPort{
     public:
         uint32_t clockSpeed=0;
         uint8_t portSize=0;
-        uint64_t outputValue=0;
+        uint32_t outputValue=0;
 
         extendedPort &setClockSpeed(uint32_t _clockSpeed){
             clockSpeed=_clockSpeed;
@@ -60,7 +60,7 @@ class extendedPort{
             return *this;
         }
 
-        extendedPort &write(uint64_t _outputValue){
+        extendedPort &write(uint32_t _outputValue){
             outputValue=_outputValue;
             return write();
         }
