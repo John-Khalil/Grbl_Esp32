@@ -25,7 +25,7 @@ class extendedPort{
     public:
         uint32_t clockSpeed=0;
         uint8_t portSize=0;
-        uint32_t outputValue=0;
+        uint64_t outputValue=0;
 
         extendedPort &setClockSpeed(uint32_t _clockSpeed){
             clockSpeed=_clockSpeed;
@@ -41,11 +41,11 @@ class extendedPort{
             uint8_t loopCounter=portSize;
             while(loopCounter--){
                 dataPin((outputValue>>loopCounter)&0x01);
-                delay_us(halfDelayTime);
+                delay_us(delayTime);
                 clkPin(1);
                 delay_us(delayTime);
                 clkPin(0);
-                delay_us(halfDelayTime);
+                // delay_us(halfDelayTime);
             }
             latchPin(1);
             delay_us(delayTime);
@@ -60,7 +60,7 @@ class extendedPort{
             return *this;
         }
 
-        extendedPort &write(uint32_t _outputValue){
+        extendedPort &write(uint64_t _outputValue){
             outputValue=_outputValue;
             return write();
         }

@@ -81,7 +81,7 @@ void setup() {
     async({
       uint8_t blinker=0;
       while(1){
-        #define validationCount 2000
+        #define validationCount 20000
         uint16_t loopCounter=validationCount;
         uint16_t time=millis();
         while(loopCounter--){
@@ -90,7 +90,7 @@ void setup() {
         }
         time=millis()-time;
         console.log("time >> ",(uint16_t)time);
-        vTaskDelay(500);
+        vTaskDelay(1500);
       }
       
     });
