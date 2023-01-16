@@ -47,6 +47,10 @@ void setup() {
     _PM(shiftRegisterDataPin,OUTPUT);
     _PM(shiftRegisterLatchPin,OUTPUT);
 
+    spiPort.passThrough([&](uint16_t pinNumber,uint8_t pinState,uint64_t outputValue){
+      console.log(">> ",pinNumber,">> ",pinState,">> ",(uint16_t)outputValue);
+    });
+
     spiPort.setup([&](uint8_t clkPin){
       if(clkPin)
         outputRegisterLowSet|=(1<<shiftRegisterClkPin);
@@ -78,22 +82,22 @@ void setup() {
     //   }
     // });
 
-    async({
-      uint8_t blinker=0;
-      while(1){
-        #define validationCount 20000
-        uint16_t loopCounter=validationCount;
-        uint16_t time=millis();
-        while(loopCounter--){
-          // spiPort.write(spiPort.outputValue^65535);
-          spiPort.write(15,blinker^=255);
-        }
-        time=millis()-time;
-        console.log("time >> ",(uint16_t)time);
-        vTaskDelay(1500);
-      }
+    // async({
+    //   uint8_t blinker=0;
+    //   while(1){
+    //     #define validationCount 20000
+    //     uint16_t loopCounter=validationCount;
+    //     uint16_t time=millis();
+    //     while(loopCounter--){
+    //       // spiPort.write(spiPort.outputValue^65535);
+    //       spiPort.write(15,blinker^=255);
+    //     }
+    //     time=millis()-time;
+    //     console.log("time >> ",(uint16_t)time);
+    //     vTaskDelay(1500);
+    //   }
       
-    });
+    // });
 
     // async({
     //   while(1){
