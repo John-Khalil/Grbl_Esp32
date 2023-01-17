@@ -47,9 +47,9 @@ void setup() {
     _PM(shiftRegisterDataPin,OUTPUT);
     _PM(shiftRegisterLatchPin,OUTPUT);
 
-    spiPort.passThrough([&](uint16_t pinNumber,uint8_t pinState,uint64_t outputValue){
-      console.log(">> ",pinNumber,">> ",pinState,">> ",(uint16_t)outputValue);
-    });
+    // spiPort.passThrough([&](uint16_t pinNumber,uint8_t pinState,uint64_t outputValue){
+    //   console.log(">> ",pinNumber,">> ",pinState,">> ",(uint16_t)outputValue);
+    // });
 
     spiPort.setup([&](uint8_t clkPin){
       if(clkPin)
