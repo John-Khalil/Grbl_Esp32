@@ -41,19 +41,17 @@ class extendedPort{
 
         extendedPort &write(void){
             if(externalSpiPort!=nullptr)
-                console.log("log 1");
-                // externalSpiPort(outputValue,portSize);
+                externalSpiPort(outputValue,portSize);
             else{
-                console.log("log 1");
-                // uint8_t loopCounter=portSize;
-                // while(loopCounter--){
-                //     dataPin((outputValue>>loopCounter)&0x01);
-                //     delay_us(delayTime);
-                //     clkPin(1);
-                //     delay_us(delayTime);
-                //     clkPin(0);
-                //     // delay_us(halfDelayTime);
-                // }
+                uint8_t loopCounter=portSize;
+                while(loopCounter--){
+                    dataPin((outputValue>>loopCounter)&0x01);
+                    delay_us(delayTime);
+                    clkPin(1);
+                    delay_us(delayTime);
+                    clkPin(0);
+                    // delay_us(halfDelayTime);
+                }
             }
             
 
@@ -117,12 +115,14 @@ class extendedPort{
         void setup(
             const std::function<void(uint64_t,uint8_t)>&_externalSpiPort,
             const std::function<void(unsigned char)>&_latchPin,
+            const std::function<void(float)>&_delay_us,
             uint32_t _clockSpeed=1000000,
             uint8_t _portSize=32,
             uint64_t _outputValue=0
         ){
             externalSpiPort=_externalSpiPort;
             latchPin=_latchPin;
+            delay_us=_delay_us;
 
             portSize=_portSize;
             outputValue=_outputValue;

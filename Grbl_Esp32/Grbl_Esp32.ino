@@ -92,6 +92,9 @@ void setup() {
           outputRegisterLowSet|=(1<<shiftRegisterLatchPin);
         else
           outputRegisterLowClear|=(1<<shiftRegisterLatchPin);
+      },
+      [&](float microSec){
+        
       }
     );
 
@@ -107,7 +110,7 @@ void setup() {
     async({
       uint8_t blinker=0;
       while(1){
-        #define validationCount 20000
+        #define validationCount 2000
         uint16_t loopCounter=validationCount;
         uint16_t time=millis();
         while(loopCounter--){
