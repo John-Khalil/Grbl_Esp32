@@ -51,27 +51,49 @@ void setup() {
     //   console.log(">> ",pinNumber,">> ",pinState,">> ",(uint16_t)outputValue);
     // });
 
-    spiPort.setup([&](uint8_t clkPin){
-      if(clkPin)
-        outputRegisterLowSet|=(1<<shiftRegisterClkPin);
-      else
-        outputRegisterLowClear|=(1<<shiftRegisterClkPin);
-    },
-    [&](uint8_t dataPin){
-      if(dataPin)
-        outputRegisterLowSet|=(1<<shiftRegisterDataPin);
-      else
-        outputRegisterLowClear|=(1<<shiftRegisterDataPin);
-    },
-    [&](uint8_t latchPin){
-      if(latchPin)
-        outputRegisterLowSet|=(1<<shiftRegisterLatchPin);
-      else
-        outputRegisterLowClear|=(1<<shiftRegisterLatchPin);
-    },
-    [&](float microSec){
+    // spiPort.setup([&](uint8_t clkPin){
+    //   if(clkPin)
+    //     outputRegisterLowSet|=(1<<shiftRegisterClkPin);
+    //   else
+    //     outputRegisterLowClear|=(1<<shiftRegisterClkPin);
+    // },
+    // [&](uint8_t dataPin){
+    //   if(dataPin)
+    //     outputRegisterLowSet|=(1<<shiftRegisterDataPin);
+    //   else
+    //     outputRegisterLowClear|=(1<<shiftRegisterDataPin);
+    // },
+    // [&](uint8_t latchPin){
+    //   if(latchPin)
+    //     outputRegisterLowSet|=(1<<shiftRegisterLatchPin);
+    //   else
+    //     outputRegisterLowClear|=(1<<shiftRegisterLatchPin);
+    // },
+    // [&](float microSec){
       
-    });
+    // });
+
+    spiPort.setup(
+      [&](uint64_t outputValue,uint8_t portSize){
+        uint8_t loopCounter=portSize;
+        while(loopCounter--){
+          // dataPin((outputValue>>loopCounter)&0x01);
+          // (((outputValue>>loopCounter)&0x01)?outputRegisterLowSet:outputRegisterLowClear)|=(1<<shiftRegisterDataPin);
+          if(((outputValue>>loopCounter)&0x01))
+            outputRegisterLowSet|=(1<<shiftRegisterDataPin);
+          else
+            outputRegisterLowClear|=(1<<shiftRegisterDataPin);
+          outputRegisterLowSet|=(1<<shiftRegisterClkPin);
+          outputRegisterLowClear|=(1<<shiftRegisterClkPin);
+        }
+      },
+      [&](uint8_t latchPin){
+        if(latchPin)
+          outputRegisterLowSet|=(1<<shiftRegisterLatchPin);
+        else
+          outputRegisterLowClear|=(1<<shiftRegisterLatchPin);
+      }
+    );
 
     // async({
     //   uint8_t blinker=0;
@@ -82,22 +104,22 @@ void setup() {
     //   }
     // });
 
-    // async({
-    //   uint8_t blinker=0;
-    //   while(1){
-    //     #define validationCount 20000
-    //     uint16_t loopCounter=validationCount;
-    //     uint16_t time=millis();
-    //     while(loopCounter--){
-    //       // spiPort.write(spiPort.outputValue^65535);
-    //       spiPort.write(15,blinker^=255);
-    //     }
-    //     time=millis()-time;
-    //     console.log("time >> ",(uint16_t)time);
-    //     vTaskDelay(1500);
-    //   }
+    async({
+      uint8_t blinker=0;
+      while(1){
+        #define validationCount 20000
+        uint16_t loopCounter=validationCount;
+        uint16_t time=millis();
+        while(loopCounter--){
+          // spiPort.write(spiPort.outputValue^65535);
+          spiPort.write(15,blinker^=255);
+        }
+        time=millis()-time;
+        console.log("time >> ",(uint16_t)time);
+        vTaskDelay(1500);
+      }
       
-    // });
+    });
 
     // async({
     //   while(1){
