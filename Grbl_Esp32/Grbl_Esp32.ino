@@ -108,22 +108,22 @@ void setup() {
     //   }
     // });
 
-    async({
-      uint8_t blinker=0;
-      while(1){
-        #define validationCount 2000
-        uint16_t loopCounter=validationCount;
-        uint16_t time=millis();
-        while(loopCounter--){
-          // spiPort.write(spiPort.outputValue^65535);
-          spiPort.write(15,blinker^=255);
-        }
-        time=millis()-time;
-        console.log("time >> ",(uint16_t)time);
-        vTaskDelay(1500);
-      }
+    // async({
+    //   uint8_t blinker=0;
+    //   while(1){
+    //     #define validationCount 2000
+    //     uint16_t loopCounter=validationCount;
+    //     uint16_t time=millis();
+    //     while(loopCounter--){
+    //       // spiPort.write(spiPort.outputValue^65535);
+    //       spiPort.write(15,blinker^=255);
+    //     }
+    //     time=millis()-time;
+    //     console.log("time >> ",(uint16_t)time);
+    //     vTaskDelay(1500);
+    //   }
       
-    });
+    // });
 
     // async({
     //   while(1){
