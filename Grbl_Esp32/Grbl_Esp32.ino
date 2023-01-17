@@ -78,11 +78,12 @@ void setup() {
         uint8_t loopCounter=portSize;
         while(loopCounter--){
           // dataPin((outputValue>>loopCounter)&0x01);
-          // (((outputValue>>loopCounter)&0x01)?outputRegisterLowSet:outputRegisterLowClear)|=(1<<shiftRegisterDataPin);
-          if(((outputValue>>loopCounter)&0x01))
-            outputRegisterLowSet|=(1<<shiftRegisterDataPin);
-          else
-            outputRegisterLowClear|=(1<<shiftRegisterDataPin);
+          (((outputValue>>loopCounter)&0x01)?outputRegisterLowSet:outputRegisterLowClear)|=(1<<shiftRegisterDataPin);
+          // if(((outputValue>>loopCounter)&0x01))
+          //   outputRegisterLowSet|=(1<<shiftRegisterDataPin);
+          // else
+          //   outputRegisterLowClear|=(1<<shiftRegisterDataPin);
+
           outputRegisterLowSet|=(1<<shiftRegisterClkPin);
           outputRegisterLowClear|=(1<<shiftRegisterClkPin);
         }
