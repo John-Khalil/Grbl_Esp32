@@ -35,9 +35,9 @@ void IRAM_ATTR digitalWrite(uint8_t pin, uint8_t val) {
         __digitalWrite(pin, val);
         return;
     }
+    spiPort.write((pin-I2S_OUT_PIN_BASE),val);
 #ifdef USE_I2S_OUT
 
-    spiPort.write((pin-I2S_OUT_PIN_BASE),val);
     i2s_out_write(pin - I2S_OUT_PIN_BASE, val);
 #endif
 }
