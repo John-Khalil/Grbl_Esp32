@@ -1144,9 +1144,9 @@ design rules under a new name.</description>
 <attribute name="NAME" x="63.5" y="97.155" size="1.016" layer="25" ratio="10"/>
 <attribute name="VALUE" x="69.5325" y="96.2025" size="0.8128" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="E$42" library="con-molex" library_urn="urn:adsk.eagle:library:165" package="70543-22" value="" x="-88.9" y="54.61">
-<attribute name="NAME" x="-118.745" y="52.07" size="1.016" layer="25" ratio="10" rot="R90"/>
-<attribute name="VALUE" x="-117.7925" y="58.1025" size="0.8128" layer="27" ratio="10"/>
+<element name="E$42" library="con-molex" library_urn="urn:adsk.eagle:library:165" package="70543-22" value="" x="64.77" y="-12.7">
+<attribute name="NAME" x="34.925" y="-15.24" size="1.016" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="35.8775" y="-9.2075" size="0.8128" layer="27" ratio="10"/>
 </element>
 </elements>
 <signals>
