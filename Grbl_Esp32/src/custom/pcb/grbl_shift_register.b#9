@@ -1188,6 +1188,14 @@ design rules under a new name.</description>
 <attribute name="NAME" x="73.6238" y="90.2462" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="72.43" y="87.63" size="1.27" layer="27" ratio="10"/>
 </element>
+<element name="E$51" library="con-lstb" library_urn="urn:adsk.eagle:library:162" package="MA04-1" package3d_urn="urn:adsk.eagle:package:8337/1" value="" x="91.44" y="97.79">
+<attribute name="NAME" x="86.36" y="99.441" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="92.075" y="99.441" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="E$52" library="diode" library_urn="urn:adsk.eagle:library:210" package="DO34-7" package3d_urn="urn:adsk.eagle:package:43348/1" value="" x="104.14" y="92.71">
+<attribute name="NAME" x="102.616" y="93.853" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="102.616" y="90.297" size="1.27" layer="27" ratio="10"/>
+</element>
 </elements>
 <signals>
 <signal name="S$1">

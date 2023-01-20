@@ -71,6 +71,7 @@
 </layers>
 <board>
 <plain>
+<text x="73.66" y="6.35" size="1.778" layer="16" rot="MR0">DR. MUSTAFA M. SHIPLE</text>
 </plain>
 <libraries>
 <library name="con-lsta" urn="urn:adsk.eagle:library:161">

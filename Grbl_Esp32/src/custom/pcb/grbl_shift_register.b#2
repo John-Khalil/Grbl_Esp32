@@ -78,6 +78,7 @@
 <text x="35.56" y="66.04" size="1.778" layer="16" rot="MR180">John Khalil</text>
 <text x="77.47" y="62.23" size="1.778" layer="16" rot="MR0">Marwan 
 Hesham</text>
+<text x="43.18" y="92.71" size="1.778" layer="16" rot="MR270">5DLCG</text>
 </plain>
 <libraries>
 <library name="con-lsta" urn="urn:adsk.eagle:library:161">
