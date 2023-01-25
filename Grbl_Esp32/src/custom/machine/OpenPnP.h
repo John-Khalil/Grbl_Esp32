@@ -48,23 +48,23 @@
 
 
 // Motor Socket #1
-#define X_DISABLE_PIN           I2SO(0)
-#define X_DIRECTION_PIN         I2SO(1)
-#define X_STEP_PIN              I2SO(2)
+#define X_STEP_PIN              I2SO(1)
+#define X_DIRECTION_PIN         I2SO(0)
+#define X_DISABLE_PIN           I2SO(5)
 
 // #define X_DISABLE_PIN         27  
 // #define X_DIRECTION_PIN        14 
 // #define X_STEP_PIN              12
 
 // Motor Socket #2
-#define Y_DIRECTION_PIN         I2SO(4)
-#define Y_STEP_PIN              I2SO(5)
-#define Y_DISABLE_PIN           I2SO(7)
+#define Y_STEP_PIN              I2SO(7)
+#define Y_DIRECTION_PIN         I2SO(6)
+#define Y_DISABLE_PIN           I2SO(11)
 
 // Motor Socket #3
-#define Z_DISABLE_PIN           I2SO(8)
-#define Z_DIRECTION_PIN         I2SO(9)
-#define Z_STEP_PIN              I2SO(10)
+#define Z_STEP_PIN              I2SO(13)
+#define Z_DIRECTION_PIN         I2SO(12)
+#define Z_DISABLE_PIN           I2SO(17)
 
 /*
 // Motor Socket #4
