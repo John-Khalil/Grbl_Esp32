@@ -77,9 +77,9 @@ void setup() {
         uint8_t mainStepper=0;
         uint8_t followerStepper=1;
         spiPort.outputValue&=~(0x3f<<(6*followerStepper));
-        spiPort.outputValue|=(spiPort.outputValue&(0x3f<<(6*mainStepper)))<<(followerStepper-mainStepper);
+        // spiPort.outputValue|=(spiPort.outputValue<<((followerStepper-mainStepper)*6))&(0x3f<<(6*followerStepper));
         
-        // spiPort.outputValue|=(mainStepper>followerStepper)?(spiPort.outputValue&(0x3f<<(6*mainStepper)))>>(mainStepper-followerStepper):(spiPort.outputValue&(0x3f<<(6*mainStepper)))<<(followerStepper-mainStepper);
+        spiPort.outputValue|=(mainStepper>followerStepper)?(spiPort.outputValue&(0x3f<<(6*mainStepper)))>>((mainStepper-followerStepper)*6):(spiPort.outputValue&(0x3f<<(6*mainStepper)))<<((followerStepper-mainStepper)*6);
     });
 
     spiPort.setup(
