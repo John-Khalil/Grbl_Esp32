@@ -40,6 +40,11 @@ class extendedPort{
 
 
         extendedPort &write(void){
+
+            unsigned char passThroughCounter=outputPassthrough.size();
+            while(passThroughCounter--)
+                outputPassthrough[passThroughCounter](pinNumber,pinState,outputValue);
+                
             if(externalSpiPort!=nullptr)
                 externalSpiPort(outputValue,portSize);
             else{
@@ -58,10 +63,6 @@ class extendedPort{
             latchPin(1);
             delay_us(delayTime);
             latchPin(0);
-
-            unsigned char passThroughCounter=outputPassthrough.size();
-            while(passThroughCounter--)
-                outputPassthrough[passThroughCounter](pinNumber,pinState,outputValue);
 
             pinNumber=-1;
             pinState=-1;

@@ -73,6 +73,13 @@ void setup() {
       
     // });
 
+    spiPort.passThrough([&](uint16_t pinNumber,uint8_t pinState,uint64_t outputValue){  //^ duplicate the output of the stepper for the extra x-axis stepper
+        uint8_t mainStepper=0;
+        uint8_t followerStepper=4;
+        spiPort.outputValue&=~(0x3f<<(6*followerStepper));
+        spiPort.outputValue|=(mainStepper>followerStepper)?(spiPort.outputValue&(0x3f<<(6*mainStepper)))>>(mainStepper-followerStepper):(spiPort.outputValue&(0x3f<<(6*mainStepper)))<<(followerStepper-mainStepper);
+    });
+
     spiPort.setup(
       [&](uint64_t outputValue,uint8_t portSize){
         uint8_t loopCounter=portSize;
