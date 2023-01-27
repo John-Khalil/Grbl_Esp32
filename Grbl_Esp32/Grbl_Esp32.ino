@@ -107,6 +107,7 @@ void setup() {
         
       }
     );
+    spiPort.write((1<<3)|(1<<9)|(1<<15)|(1<<20)|(1<<26));   // setting the micro stepping to quarter step
 
     // async({
     //   uint8_t blinker=0;
