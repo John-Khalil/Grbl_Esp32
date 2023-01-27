@@ -128,7 +128,7 @@ Socket #5
 // https://github.com/bdring/6-Pack_CNC_Controller/wiki/4x-Switch-Input-module
 #define X_LIMIT_PIN                 GPIO_NUM_33
 #define Y_LIMIT_PIN                 GPIO_NUM_32
-#define Z_LIMIT_PIN                 GPIO_NUM_35
+#define Z_LIMIT_PIN                 GPIO_NUM_25
 
 
 
