@@ -68,8 +68,8 @@
 
 // Motor Socket #4
 #define A_SERVO_PIN 		      GPIO_NUM_26
-#define DEFAULT_A_MAX_TRAVEL          200.0   // or change it live with $Z/MaxTravel=5.0
-#define DEFAULT_A_HOMING_MPOS         200.0   // $Z/Homing/MPos=5.0
+#define DEFAULT_A_MAX_TRAVEL          20   // or change it live with $Z/MaxTravel=5.0
+#define DEFAULT_A_HOMING_MPOS         0   // $Z/Homing/MPos=5.0
 
 /*
 // Motor Socket #4
