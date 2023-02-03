@@ -33,7 +33,7 @@
 */
 #define MACHINE_NAME            "6 Pack External XYZ"
 
-#define N_AXIS 3
+#define N_AXIS 4
 
 // === Special Features
 
@@ -66,6 +66,11 @@
 #define Z_DIRECTION_PIN         I2SO(23)
 #define Z_DISABLE_PIN           I2SO(18)
 
+// Motor Socket #4
+#define A_SERVO_PIN 		      GPIO_NUM_26
+#define DEFAULT_A_MAX_TRAVEL          200.0   // or change it live with $Z/MaxTravel=5.0
+#define DEFAULT_A_HOMING_MPOS         200.0   // $Z/Homing/MPos=5.0
+
 /*
 // Motor Socket #4
 #define A_DIRECTION_PIN         I2SO(12)
@@ -85,6 +90,10 @@
 
 
 /*  //^ future tests
+
+#define USE_SERVO_AXES >> config.h
+#define SERVO_Y_PIN GPIO_NUM_14
+#define SERVO_Y_CHANNEL_NUM 6
 
 
 
