@@ -52,6 +52,11 @@
 #define X_DIRECTION_PIN         I2SO(0)
 #define X_DISABLE_PIN           I2SO(5)
 
+// Motor Socket #1
+// #define X2_STEP_PIN              I2SO(7)
+// #define X2_DIRECTION_PIN         I2SO(6)
+// #define X2_DISABLE_PIN           I2SO(11)
+
 // #define X_DISABLE_PIN         27  
 // #define X_DIRECTION_PIN        14 
 // #define X_STEP_PIN              12
@@ -66,10 +71,12 @@
 #define Z_DIRECTION_PIN         I2SO(23)
 #define Z_DISABLE_PIN           I2SO(18)
 
-// Motor Socket #4
-#define A_SERVO_PIN 		      GPIO_NUM_26
-#define DEFAULT_A_MAX_TRAVEL          20   // or change it live with $Z/MaxTravel=5.0
-#define DEFAULT_A_HOMING_MPOS         0   // $Z/Homing/MPos=5.0
+
+
+// // Motor Socket #4
+// #define A_SERVO_PIN 		      GPIO_NUM_26
+// #define DEFAULT_A_MAX_TRAVEL          20   // or change it live with $Z/MaxTravel=5.0
+// #define DEFAULT_A_HOMING_MPOS         0   // $Z/Homing/MPos=5.0
 
 /*
 // Motor Socket #4
@@ -213,9 +220,10 @@ Socket #5
 
 // 4x Input Module in Socket #1
 // https://github.com/bdring/6-Pack_CNC_Controller/wiki/4x-Switch-Input-module
-#define X_LIMIT_PIN                 GPIO_NUM_33
-#define Y_LIMIT_PIN                 GPIO_NUM_32
-#define Z_LIMIT_PIN                 GPIO_NUM_25
+#define X_LIMIT_PIN                     GPIO_NUM_33
+// #define X2_LIMIT_PIN                    GPIO_NUM_26
+#define Y_LIMIT_PIN                     GPIO_NUM_32
+#define Z_LIMIT_PIN                     GPIO_NUM_25
 
 
 
