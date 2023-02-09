@@ -171,9 +171,33 @@
 #define STEPPERS_DISABLE_PIN GPIO_NUM_13 //^ we have to test
 
 
+//* ------------                                                 spindle
+
+enum class SpindleType : int8_t {
+    NONE = 0,
+    PWM,
+    RELAY,
+    LASER,
+    DAC,
+    HUANYANG,
+    BESC,
+    _10V,
+    H2A,
+    YL620,
+    L510
+};
+
+#define SPINDLE_TYPE            SpindleType::RELAY
+#define SPINDLE_TYPE            SpindleType::PWM
+
+#define SPINDLE_OUTPUT_PIN          GPIO_NUM_16
+#define SPINDLE_ENABLE_PIN          GPIO_NUM_32
+
+
+
 */
 
-
+//* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -233,6 +257,11 @@ Socket #5
 #define DEFAULT_STEP_ENABLE_DELAY        5 // how long after enable do we wait for 
 #define DEFAULT_STEP_PULSE_MICROSECONDS  0 // length of step pulse. Must be greater than I2S_OUT_USEC_PER_PULSE (4) with I2S
 #define STEP_PULSE_DELAY                 6 // gap between enable and dir changes before step
+
+#define SPINDLE_TYPE            SpindleType::PWM
+
+#define SPINDLE_OUTPUT_PIN          GPIO_NUM_26
+// #define SPINDLE_ENABLE_PIN          GPIO_NUM_13
 
 #define DEFAULT_STEPPING_INVERT_MASK     (bit(X_AXIS) | bit(Y_AXIS) | bit(Z_AXIS))
 #define DEFAULT_DIRECTION_INVERT_MASK    (bit(X_AXIS) | bit(Y_AXIS) | bit(Z_AXIS))
