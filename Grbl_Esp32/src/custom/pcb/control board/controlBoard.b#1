@@ -962,10 +962,6 @@ design rules under a new name.</description>
 <attribute name="NAME" x="31.369" y="29.21" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="35.941" y="43.18" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="E$3" library="con-lstb" library_urn="urn:adsk.eagle:library:162" package="MA10-1" package3d_urn="urn:adsk.eagle:package:8346/1" value="" x="44.45" y="26.67" rot="R180">
-<attribute name="NAME" x="57.15" y="25.019" size="1.27" layer="25" ratio="10" rot="R180"/>
-<attribute name="VALUE" x="43.18" y="29.591" size="1.27" layer="27" ratio="10" rot="R180"/>
-</element>
 <element name="E$4" library="con-lstb" library_urn="urn:adsk.eagle:library:162" package="MA09-1" package3d_urn="urn:adsk.eagle:package:8350/1" value="" x="55.88" y="66.04" rot="R90">
 <attribute name="NAME" x="54.229" y="54.61" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="58.801" y="66.04" size="1.27" layer="27" ratio="10" rot="R90"/>
@@ -1114,9 +1110,9 @@ design rules under a new name.</description>
 <attribute name="NAME" x="13.8938" y="29.1738" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="16.51" y="27.98" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="E$41" library="con-lsta" library_urn="urn:adsk.eagle:library:161" package="FE06" package3d_urn="urn:adsk.eagle:package:8191/1" value="" x="74.93" y="58.42" rot="R180">
-<attribute name="NAME" x="78.74" y="56.769" size="1.27" layer="25" ratio="10" rot="R180"/>
-<attribute name="VALUE" x="82.55" y="61.341" size="1.27" layer="27" ratio="10" rot="R180"/>
+<element name="E$41" library="con-lsta" library_urn="urn:adsk.eagle:library:161" package="FE06" package3d_urn="urn:adsk.eagle:package:8191/1" value="" x="76.2" y="58.42" rot="R180">
+<attribute name="NAME" x="80.01" y="56.769" size="1.27" layer="25" ratio="10" rot="R180"/>
+<attribute name="VALUE" x="83.82" y="61.341" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
 <element name="E$42" library="con-lsta" library_urn="urn:adsk.eagle:library:161" package="FE07" package3d_urn="urn:adsk.eagle:package:8223/1" value="" x="81.28" y="38.1" rot="R90">
 <attribute name="NAME" x="79.629" y="33.02" size="1.27" layer="25" ratio="10" rot="R90"/>
@@ -1204,8 +1200,7 @@ design rules under a new name.</description>
 <contactref element="E$41" pad="6"/>
 <contactref element="E$10" pad="3"/>
 <contactref element="E$6" pad="3"/>
-<wire x1="68.58" y1="58.42" x2="68.58" y2="59.69" width="0.6096" layer="16"/>
-<wire x1="68.58" y1="59.69" x2="67.31" y2="60.96" width="0.6096" layer="16"/>
+<wire x1="69.85" y1="58.42" x2="67.31" y2="60.96" width="0.6096" layer="16"/>
 <wire x1="67.31" y1="60.96" x2="63.5" y2="60.96" width="0.6096" layer="16"/>
 <wire x1="63.5" y1="60.96" x2="60.96" y2="60.96" width="0.6096" layer="16"/>
 <wire x1="60.96" y1="60.96" x2="58.42" y2="60.96" width="0.6096" layer="16"/>
@@ -1378,14 +1373,14 @@ design rules under a new name.</description>
 <wire x1="49.53" y1="71.12" x2="50.8" y2="69.85" width="0.6096" layer="16"/>
 <wire x1="50.8" y1="69.85" x2="50.8" y2="60.96" width="0.6096" layer="16"/>
 <wire x1="50.8" y1="60.96" x2="52.07" y2="59.69" width="0.6096" layer="16"/>
-<wire x1="71.12" y1="55.88" x2="71.12" y2="58.42" width="0.6096" layer="16"/>
+<wire x1="72.39" y1="55.88" x2="72.39" y2="58.42" width="0.6096" layer="16"/>
 <wire x1="38.1" y1="71.12" x2="49.53" y2="71.12" width="0.6096" layer="16"/>
-<wire x1="52.07" y1="59.69" x2="66.04" y2="59.69" width="0.6096" layer="16"/>
-<wire x1="66.675" y1="57.785" x2="68.58" y2="55.88" width="0.6096" layer="16"/>
-<wire x1="66.675" y1="59.055" x2="66.04" y2="59.69" width="0.6096" layer="16"/>
-<wire x1="66.675" y1="57.785" x2="66.675" y2="59.055" width="0.6096" layer="16"/>
-<wire x1="68.58" y1="55.88" x2="71.12" y2="55.88" width="0.6096" layer="16"/>
+<wire x1="66.04" y1="59.69" x2="52.07" y2="59.69" width="0.6096" layer="16"/>
+<wire x1="68.58" y1="55.88" x2="72.39" y2="55.88" width="0.6096" layer="16"/>
 <wire x1="36.83" y1="52.07" x2="36.83" y2="31.75" width="0.6096" layer="16"/>
+<wire x1="67.31" y1="58.42" x2="66.04" y2="59.69" width="0.6096" layer="16"/>
+<wire x1="68.58" y1="55.88" x2="67.31" y2="57.15" width="0.6096" layer="16"/>
+<wire x1="67.31" y1="57.15" x2="67.31" y2="58.42" width="0.6096" layer="16"/>
 </signal>
 <signal name="S$13">
 <contactref element="E$35" pad="A"/>
@@ -1419,8 +1414,8 @@ design rules under a new name.</description>
 <wire x1="63.5" y1="53.34" x2="64.77" y2="53.34" width="0.6096" layer="16"/>
 <wire x1="64.77" y1="53.34" x2="66.04" y2="52.07" width="0.6096" layer="16"/>
 <wire x1="66.04" y1="52.07" x2="80.01" y2="52.07" width="0.6096" layer="16"/>
-<wire x1="80.01" y1="52.07" x2="81.28" y2="53.34" width="0.6096" layer="16"/>
-<wire x1="81.28" y1="53.34" x2="81.28" y2="58.42" width="0.6096" layer="16"/>
+<wire x1="80.01" y1="52.07" x2="82.55" y2="54.61" width="0.6096" layer="16"/>
+<wire x1="82.55" y1="58.42" x2="82.55" y2="54.61" width="0.6096" layer="16"/>
 <contactref element="E$11" pad="10"/>
 <contactref element="E$7" pad="10"/>
 <contactref element="E$5" pad="10"/>
@@ -1432,8 +1427,8 @@ design rules under a new name.</description>
 <contactref element="E$41" pad="2"/>
 <contactref element="E$16" pad="1"/>
 <wire x1="67.31" y1="53.34" x2="77.47" y2="53.34" width="0.6096" layer="16"/>
-<wire x1="77.47" y1="53.34" x2="78.74" y2="54.61" width="0.6096" layer="16"/>
-<wire x1="78.74" y1="54.61" x2="78.74" y2="58.42" width="0.6096" layer="16"/>
+<wire x1="77.47" y1="53.34" x2="80.01" y2="55.88" width="0.6096" layer="16"/>
+<wire x1="80.01" y1="58.42" x2="80.01" y2="55.88" width="0.6096" layer="16"/>
 <wire x1="64.77" y1="55.88" x2="67.31" y2="53.34" width="0.6096" layer="16"/>
 <wire x1="63.5" y1="55.88" x2="64.77" y2="55.88" width="0.6096" layer="16"/>
 <contactref element="E$10" pad="1"/>
@@ -1446,8 +1441,8 @@ design rules under a new name.</description>
 <signal name="S$17">
 <contactref element="E$16" pad="8"/>
 <contactref element="E$41" pad="3"/>
-<wire x1="76.2" y1="58.42" x2="76.2" y2="71.12" width="0.6096" layer="16"/>
-<wire x1="76.2" y1="71.12" x2="73.66" y2="73.66" width="0.6096" layer="16"/>
+<wire x1="77.47" y1="69.85" x2="77.47" y2="58.42" width="0.6096" layer="16"/>
+<wire x1="77.47" y1="69.85" x2="73.66" y2="73.66" width="0.6096" layer="16"/>
 <wire x1="73.66" y1="73.66" x2="63.5" y2="73.66" width="0.6096" layer="16"/>
 <contactref element="E$10" pad="8"/>
 <contactref element="E$6" pad="8"/>
@@ -1460,16 +1455,16 @@ design rules under a new name.</description>
 <contactref element="E$16" pad="2"/>
 <contactref element="E$41" pad="4"/>
 <wire x1="63.5" y1="58.42" x2="64.77" y2="58.42" width="0.6096" layer="16"/>
-<wire x1="72.39" y1="54.61" x2="73.66" y2="55.88" width="0.6096" layer="16"/>
-<wire x1="73.66" y1="55.88" x2="73.66" y2="58.42" width="0.6096" layer="16"/>
-<wire x1="64.77" y1="58.42" x2="68.58" y2="54.61" width="0.6096" layer="16"/>
-<wire x1="68.58" y1="54.61" x2="72.39" y2="54.61" width="0.6096" layer="16"/>
+<wire x1="74.93" y1="55.88" x2="73.66" y2="54.61" width="0.6096" layer="16"/>
+<wire x1="74.93" y1="58.42" x2="74.93" y2="55.88" width="0.6096" layer="16"/>
 <contactref element="E$10" pad="2"/>
 <contactref element="E$6" pad="2"/>
 <contactref element="E$4" pad="2"/>
 <wire x1="63.5" y1="58.42" x2="60.96" y2="58.42" width="0.6096" layer="16"/>
 <wire x1="60.96" y1="58.42" x2="58.42" y2="58.42" width="0.6096" layer="16"/>
 <wire x1="58.42" y1="58.42" x2="55.88" y2="58.42" width="0.6096" layer="16"/>
+<wire x1="68.58" y1="54.61" x2="73.66" y2="54.61" width="0.6096" layer="16"/>
+<wire x1="64.77" y1="58.42" x2="68.58" y2="54.61" width="0.6096" layer="16"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
