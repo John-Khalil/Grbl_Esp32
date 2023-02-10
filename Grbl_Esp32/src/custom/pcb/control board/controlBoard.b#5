@@ -783,21 +783,21 @@ design rules under a new name.</description>
 <attribute name="NAME" x="11.557" y="49.276" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="VALUE" x="15.113" y="49.276" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="E$35" library="diode" library_urn="urn:adsk.eagle:library:210" package="DO34-7" package3d_urn="urn:adsk.eagle:package:43348/1" value="" x="6.35" y="39.37" rot="R90">
-<attribute name="NAME" x="5.207" y="37.846" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="VALUE" x="8.763" y="37.846" size="1.27" layer="27" ratio="10" rot="R90"/>
+<element name="E$35" library="diode" library_urn="urn:adsk.eagle:library:210" package="DO34-7" package3d_urn="urn:adsk.eagle:package:43348/1" value="" x="6.35" y="45.72" rot="R90">
+<attribute name="NAME" x="5.207" y="44.196" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="8.763" y="44.196" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="E$36" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="-3.81" y="49.53" rot="R90">
-<attribute name="NAME" x="1.1938" y="45.6838" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="VALUE" x="3.81" y="44.49" size="1.27" layer="27" ratio="10" rot="R90"/>
+<element name="E$36" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="-5.08" y="41.91" rot="R90">
+<attribute name="NAME" x="-0.0762" y="38.0638" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="2.54" y="36.87" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="E$37" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="-3.81" y="41.91" rot="R90">
-<attribute name="NAME" x="1.1938" y="38.0638" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="VALUE" x="3.81" y="36.87" size="1.27" layer="27" ratio="10" rot="R90"/>
+<element name="E$37" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="-3.81" y="34.29" rot="R90">
+<attribute name="NAME" x="1.1938" y="30.4438" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="3.81" y="29.25" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="E$38" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="1.27" y="40.64" rot="R90">
-<attribute name="NAME" x="6.2738" y="36.7938" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="VALUE" x="8.89" y="35.6" size="1.27" layer="27" ratio="10" rot="R90"/>
+<element name="E$38" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="1.27" y="46.99" rot="R90">
+<attribute name="NAME" x="6.2738" y="43.1438" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="8.89" y="41.95" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
 </elements>
 <signals>
