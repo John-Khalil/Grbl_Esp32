@@ -303,7 +303,7 @@ Socket #5
 // ================= Setting Defaults ==========================
 
 // see wiki https://github.com/bdring/Grbl_Esp32/wiki/External-Stepper-Drivers
-#define DEFAULT_STEP_ENABLE_DELAY        5 // how long after enable do we wait for 
+#define DEFAULT_STEP_ENABLE_DELAY        3 // how long after enable do we wait for 
 #define DEFAULT_STEP_PULSE_MICROSECONDS  0 // length of step pulse. Must be greater than I2S_OUT_USEC_PER_PULSE (4) with I2S
 #define STEP_PULSE_DELAY                 6 // gap between enable and dir changes before step
 

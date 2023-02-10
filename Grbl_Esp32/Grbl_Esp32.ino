@@ -38,9 +38,9 @@ void setup() {
 
     console.log("code just started");
 
-    #define shiftRegisterClkPin 27
-    #define shiftRegisterDataPin 14
-    #define shiftRegisterLatchPin 12
+    #define shiftRegisterClkPin   12
+    #define shiftRegisterDataPin  27
+    #define shiftRegisterLatchPin 14
 
 
     _PM(shiftRegisterClkPin,OUTPUT);
