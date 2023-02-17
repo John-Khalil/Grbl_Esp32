@@ -20,7 +20,7 @@ class extendedPort{
         //~ external spi , that could be useful for optimizations or using HARDWARE SPI to make it even faster
         std::function<void(uint64_t,uint8_t)>externalSpiPort=nullptr;
         //~ callback list for the output passthrough , this could be useful for debugging or reading or modifying the output value
-        std::vector<std::function<void(uint16_t,uint8_t,uint64_t)>>outputPassthrough;
+        std::vector<std::function<void(uint16_t,uint8_t)>>outputPassthrough;
 
         
 
@@ -52,10 +52,9 @@ class extendedPort{
 
 
         extendedPort &write(void){
-
-            unsigned char passThroughCounter=outputPassthrough.size();
-            while(passThroughCounter--)
-                outputPassthrough[passThroughCounter](pinNumber,pinState,outputValue);
+            
+            for(auto &passThroughCallback:outputPassthrough)
+                passThroughCallback(pinNumber,pinState);
                 
             if(externalSpiPort!=nullptr)
                 externalSpiPort(outputValue,portSize);
@@ -97,7 +96,7 @@ class extendedPort{
 
         //~ push a new passthorugh callback
 
-        extendedPort &passThrough(const std::function<void(uint16_t,uint8_t,uint64_t)>passThroughCallback){
+        extendedPort &passThrough(const std::function<void(uint16_t,uint8_t)>passThroughCallback){
             outputPassthrough.push_back(passThroughCallback);
             return *this;
         }
@@ -152,6 +151,32 @@ class extendedPort{
 
             write();
         }
+
+        //^ overloaded operators
+
+        operator uint64_t(){
+            return outputValue;
+        }
+
+        operator int64_t(){
+            return (int64_t)outputValue;
+        }
+
+        extendedPort &operator=(uint64_t _outputValue){
+            outputValue=_outputValue;
+            return write();
+        }
+
+        extendedPort &operator|=(uint64_t _outputValue){
+            outputValue|=_outputValue;
+            return write();
+        }
+
+        extendedPort &operator&=(uint64_t _outputValue){
+            outputValue&=_outputValue;
+            return write();
+        }
+
 };
 
 extern extendedPort spiPort;

@@ -73,7 +73,7 @@ void setup() {
       
     // });
 
-    spiPort.passThrough([&](uint16_t pinNumber,uint8_t pinState,uint64_t outputValue){
+    spiPort.passThrough([&](uint16_t pinNumber,uint8_t pinState){
         uint8_t mainStepper=0;
         uint8_t followerStepper=1;
         spiPort.outputValue&=~(0x3f<<(6*followerStepper));
@@ -107,8 +107,8 @@ void setup() {
         
       }
     );
-    spiPort.write((1<<3)|(1<<9)|(1<<15)|(1<<20)|(1<<26));   // setting the micro stepping to quarter step
-    // spiPort.write((1<<4)|(1<<10)|(1<<16)|(1<<19)|(1<<25));      // setting the micro stepping to half step
+    spiPort|=((1<<3)|(1<<9)|(1<<15)|(1<<20)|(1<<26));   // setting the micro stepping to quarter step
+    // spiPort|=((1<<4)|(1<<10)|(1<<16)|(1<<19)|(1<<25));      // setting the micro stepping to half step
     
     // spiPort.write((1<<3)|(1<<9)|(1<<15)|(1<<20)|(1<<24)|(1<<26)|(1<<4)|(1<<10)|(1<<16)|(1<<19)|(1<<25));   // setting the micro stepping to quarter step
 
