@@ -33,7 +33,6 @@
 */
 #define MACHINE_NAME            "6 Pack External XYZ"
 
-// #define CUSTOM_CODE_FILENAME    "C:/Users/JOHN/Desktop/cMake/active/Proj_ Miu _ PCB 22/Grbl_Esp32/Grbl_Esp32/Grbl_Esp32/Custom/CoreXY.cpp"
 
 #define N_AXIS 6
 
@@ -48,6 +47,7 @@
 #define I2S_OUT_WS              GPIO_NUM_4
 #define I2S_OUT_DATA            GPIO_NUM_21
 
+#define CUSTOM_CODE_FILENAME    "../Custom/CoreXY.cpp"
 
 // Motor Socket #1
 #define X_STEP_PIN              I2SO(1)
