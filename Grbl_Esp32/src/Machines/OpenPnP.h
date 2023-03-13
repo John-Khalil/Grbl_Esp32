@@ -47,7 +47,7 @@
 #define I2S_OUT_WS              GPIO_NUM_4
 #define I2S_OUT_DATA            GPIO_NUM_21
 
-#define CUSTOM_CODE_FILENAME    "../Custom/CoreXY.cpp"
+// #define CUSTOM_CODE_FILENAME    "../Custom/CoreXY.cpp"
 
 // Motor Socket #1
 #define X_STEP_PIN              I2SO(1)
