@@ -65,6 +65,9 @@ const moveParts=()=>{
     grbl(`G1 C${part.pcb.c} F${part.pcb.feedRate}`);
     grbl(`G1 Z${part.pcb.z} F${part.pcb.feedRate}`);
     grbl(`M5`);
+    grbl(`M5`);
+    grbl(`M5`);
+    grbl(`M5`);
     grbl(`G1 Z0 F${part.feeder.feedRate}`);
     grbl(`C0`);
   });
