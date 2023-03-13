@@ -68,8 +68,8 @@ const moveParts=()=>{
     grbl(`G1 Z0 F${part.feeder.feedRate}`);
     grbl(`C0`);
   });
-  grbl('$H');
-  grbl('$X');
+  grbl('G0 X0 Y0 Z0');
+  // grbl('$X');
 }
 
 const addPart=part=>{
@@ -80,14 +80,31 @@ addPart({
   pumpSpeed:500,
   feeder:{
     x:200,
-    y:200,
-    z:33,
-    feedRate:3000
+    y:220,
+    z:32.5,
+    feedRate:20000
   },
   pcb:{
-    x:150,
-    y:50,
-    z:33,
+    x:85,
+    y:80,
+    z:33.4,
+    c:100,
+    feedRate:1500
+  }
+});
+
+addPart({
+  pumpSpeed:500,
+  feeder:{
+    x:200,
+    y:150,
+    z:33.4,
+    feedRate:20000
+  },
+  pcb:{
+    x:85,
+    y:55,
+    z:34.3,
     c:100,
     feedRate:1500
   }
