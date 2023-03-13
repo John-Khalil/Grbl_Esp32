@@ -21,11 +21,15 @@ const client = new net.Socket();
 
 client.connect(remotePort, remoteHost, ()=> {
   console.log('CONNECTED');
-
-//   client.write('$X\r\n');
+  setTimeout(() => {
+    client.write('$X\r\n');
+    
+  }, 1000);
 });
 
 client.on('data', (data)=> {
+    if(!data.toString().includes('ok'))
+      return;
     console.log(`-<${chalk.cyan(data.toString().split('\r\n')[0])}>\r\n`);
 
     setTimeout(() => {
@@ -48,7 +52,8 @@ grbl('$X');
 const parts=[];
 
 const moveParts=()=>{
-  grbl('$H');
+  // grbl('$H');
+  grbl('$X');
   grbl('C0');
   parts.forEach(part => {
     grbl(`S${part.pumpSpeed}`);
@@ -64,6 +69,7 @@ const moveParts=()=>{
     grbl(`C0`);
   });
   grbl('$H');
+  grbl('$X');
 }
 
 const addPart=part=>{
@@ -73,15 +79,15 @@ const addPart=part=>{
 addPart({
   pumpSpeed:500,
   feeder:{
-    x:250,
-    y:250,
-    z:25,
-    feedRate:20000
+    x:200,
+    y:200,
+    z:33,
+    feedRate:3000
   },
   pcb:{
     x:150,
     y:50,
-    z:25,
+    z:33,
     c:100,
     feedRate:1500
   }
