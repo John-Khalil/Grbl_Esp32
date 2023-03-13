@@ -66,3 +66,24 @@ const moveParts=()=>{
   grbl('$H');
 }
 
+const addPart=part=>{
+  parts.push(part);
+}
+
+addPart({
+  pumpSpeed:500,
+  feeder:{
+    x:250,
+    y:250,
+    z:25,
+    feedRate:20000
+  },
+  pcb:{
+    x:150,
+    y:50,
+    z:25,
+    feedRate:1500
+  }
+});
+
+moveParts();
