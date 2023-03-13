@@ -85,14 +85,14 @@ addPart({
     x:200,
     y:220,
     z:32.5,
-    feedRate:20000
+    feedRate:4000
   },
   pcb:{
     x:85,
     y:80,
     z:33.4,
     c:100,
-    feedRate:1500
+    feedRate:4000
   }
 });
 
@@ -102,14 +102,14 @@ addPart({
     x:200,
     y:150,
     z:33.4,
-    feedRate:20000
+    feedRate:4000
   },
   pcb:{
     x:85,
     y:55,
     z:34.3,
     c:100,
-    feedRate:1500
+    feedRate:4000
   }
 });
 
