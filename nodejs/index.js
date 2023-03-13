@@ -6,6 +6,7 @@ console.clear();
 
 const remoteHost='xtensa32plus.ddns.net';
 const remotePort=230;
+const commandDelay=10;
 
 
 
@@ -27,19 +28,20 @@ client.connect(remotePort, remoteHost, ()=> {
 client.on('data', (data)=> {
     console.log(`-<${chalk.cyan(data.toString().split('\r\n')[0])}>\r\n`);
 
-  if(commandsCounter<commands.length){
-    console.log(`+<${chalk.magenta(commands[commandsCounter])}>`);
-    client.write(`${commands[commandsCounter++]}\r\n`);
-  }
-    
-
+    setTimeout(() => {
+      if(commandsCounter<commands.length){
+        console.log(`+<${chalk.magenta(commands[commandsCounter])}>`);
+        client.write(`${commands[commandsCounter++]}\r\n`);
+      }
+    }, commandDelay);
 });
 
 client.on('close', ()=> {
   console.log(chalk.red('--DISCONNECTED--'));
 });
 
+grbl('$X');
 grbl('g0');
 grbl('x10');
-grbl('g0');
+grbl('y50');
 
