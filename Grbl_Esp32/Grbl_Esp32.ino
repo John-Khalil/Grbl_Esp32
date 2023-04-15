@@ -25,6 +25,8 @@
 #include "src/custom/extendedPort.h"
 #include "src/custom/esp32basics.h"
 #include "src/Pins.h"
+#include "src/custom/webService.h"
+
 
 
 void setup() {
@@ -109,6 +111,24 @@ void setup() {
       }
     );
     spiPort|=((1<<3)|(1<<9)|(1<<15)|(1<<20)|(1<<26));   // setting the micro stepping to quarter step
+
+    async({
+      vTaskDelay(15000);
+      web::service webServer(90,"/");
+      webServer.onData([&](uint8_t *data){
+        console.log("data >> ",data);
+        webServer.send(data);
+        webServer.httpSetResponse(data);
+      });
+      for(;;)vTaskDelay(1500000);
+    });
+
+
+
+
+
+
+
     // spiPort|=((1<<4)|(1<<10)|(1<<16)|(1<<19)|(1<<25));      // setting the micro stepping to half step
     
     // spiPort.write((1<<3)|(1<<9)|(1<<15)|(1<<20)|(1<<24)|(1<<26)|(1<<4)|(1<<10)|(1<<16)|(1<<19)|(1<<25));   // setting the micro stepping to quarter step
