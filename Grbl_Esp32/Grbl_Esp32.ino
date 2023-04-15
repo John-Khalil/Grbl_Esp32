@@ -113,14 +113,15 @@ void setup() {
     spiPort|=((1<<3)|(1<<9)|(1<<15)|(1<<20)|(1<<26));   // setting the micro stepping to quarter step
 
     async({
-      vTaskDelay(15000);
+      vTaskDelay(10000);
       web::service webServer(90,"/");
       webServer.onData([&](uint8_t *data){
         console.log("data >> ",data);
         webServer.send(data);
         webServer.httpSetResponse(data);
       });
-      for(;;)vTaskDelay(1500000);
+      vTaskDelay(-1UL);
+      // for(;;)vTaskDelay(1500000);
     });
 
 
