@@ -100,7 +100,10 @@ class service{
             server->addHandler(ws);
 
             server->on((char*)path, (HTTP_GET), [&](AsyncWebServerRequest *request){
-                request->send(200, "text/plain",httpResponse.c_str());
+                
+                AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", httpResponse.c_str());
+                response->addHeader("Access-Control-Allow-Origin", "*");
+                request->send(response);
                 httpResponse=HTTP_ACK;
             });
 
@@ -122,8 +125,10 @@ class service{
                     
                     for(auto readCallback:readCallbackList)
                         readCallback((uint8_t*)body.c_str());
-                    
-                    request->send(200, "text/plain",httpResponse.c_str());
+
+                    AsyncWebServerResponse *response = request->beginResponse(200, "text/plain", httpResponse.c_str());
+                    response->addHeader("Access-Control-Allow-Origin", "*");
+                    request->send(response);
                     httpResponse=HTTP_ACK;
                 }
             });
