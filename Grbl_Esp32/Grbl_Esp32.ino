@@ -54,8 +54,25 @@ utils::highLevelMemory MEMORY(20000);
 #define MOTION_CONTROLLER   "motionController"
 #define THREAD              "thread"
 
+#define PIN_MODE          "pinMode"
+#define INPUT_REGISTER_0  "inputRegister0"
+#define INPUT_REGISTER_1  "inputRegister1"
+#define OUTPUT_REGISTER_0 "outputRegister0"
+#define OUTPUT_REGISTER_1 "outputRegister1"
+
+#define ANALOG_INPUT      "analogInput"
+#define DIGITAL_INPUT     "digitalInput"
+#define DIGITAL_OUTPUT    "digitalOutput"
+#define SERVO_CONTROL     "servoControl"
+#define CLOCK_OUTPUT      "clockOutput"
+
+#define EXTENDED_OUTPUT   "extendedOutput"
+
+#define EXECUTABLE_OBJECT "executableObject"
+
 void operatorCallbackSetup(void){
   // constJson();
+  
   return;
 }
 
