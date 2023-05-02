@@ -42,7 +42,16 @@
 // #include "src/custom/webService.h"
 // #include"src/custom/fetch.h"
 
-#define statusLabel "statusLabel"
+#define STATUS_LABEL "statusLabel"
+#define INPUT_VALUE "INPUT_VALUE"
+#define RETURN_DATA "returnData"
+#define ACK "ack"
+
+#define THREAD_ACK            "THREAD_ACK"
+#define INPUT_VALUE           "INPUT_VALUE"
+#define OUTPUT_ACK            "OUTPUT_ACK"
+#define MOTIONCONTROLLER_ACK  "MOTIONCONTROLLER_ACK"
+
 
 uint8_t *addToObject(uint8_t* userObjectStr,std::string newKey,std::string newValue){
   std::string userObject=(char*)userObjectStr;
@@ -55,7 +64,7 @@ uint8_t *addToObject(uint8_t* userObjectStr,std::string newKey,std::string newVa
 
 #include "src/custom/highLevelMemory.cpp"
 
-utils::highLevelMemory MEMORY(8192);
+utils::highLevelMemory MEMORY(4096);
 
 #define INPUT_DEVICE        "inputDevice"
 #define OUTPUT_DEVICE       "outputDevice"
@@ -176,9 +185,11 @@ void setup() {
       vTaskDelay(15000);
       web::service webServer(90,"/");
       webServer.onData([&](uint8_t *data){
-        MEMORY[EXECUTABLE_OBJECT]=addToObject(data,statusLabel,"value");
+        MEMORY["test"]="random value";
+        MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"value");
 
-        console.log("data >> ",data);
+        MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"value");
+
         webServer.send((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
         webServer.httpSetResponse((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
       });
