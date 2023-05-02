@@ -42,15 +42,18 @@
 // #include "src/custom/webService.h"
 // #include"src/custom/fetch.h"
 
-#define STATUS_LABEL "statusLabel"
-#define INPUT_VALUE "INPUT_VALUE"
-#define RETURN_DATA "returnData"
-#define ACK "ack"
+#define STATUS_LABEL  "statusLabel"
+#define INPUT_VALUE   "INPUT_VALUE"
+#define RETURN_DATA   "returnData"
+#define OPERATOR      "operator"
+#define ID            "ID"
+#define ACK           "ack"
 
 #define THREAD_ACK            "THREAD_ACK"
 #define INPUT_VALUE           "INPUT_VALUE"
 #define OUTPUT_ACK            "OUTPUT_ACK"
 #define MOTIONCONTROLLER_ACK  "MOTIONCONTROLLER_ACK"
+
 
 
 uint8_t *addToObject(uint8_t* userObjectStr,std::string newKey,std::string newValue){
@@ -187,6 +190,8 @@ void setup() {
       webServer.onData([&](uint8_t *data){
         MEMORY["test"]="random value";
         MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"value");
+
+
 
         MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"value");
 
