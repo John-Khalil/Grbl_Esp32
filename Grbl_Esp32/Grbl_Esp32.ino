@@ -42,12 +42,20 @@
 // #include "src/custom/webService.h"
 // #include"src/custom/fetch.h"
 
+#define statusLabel "statusLabel"
+
+uint8_t *addToObject(uint8_t* userObjectStr,std::string newKey,std::string newValue){
+  std::string userObject=(char*)userObjectStr;
+  userObject[userObject.length()-1]=',';    // replace '}' with ',' 0x2c
+  return (uint8_t*)(userObject+="\""+newKey+"\""+":"+"\""+newValue+"\"}").c_str();
+}
+
 
 //^ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "src/custom/highLevelMemory.cpp"
 
-utils::highLevelMemory MEMORY(20000);
+utils::highLevelMemory MEMORY(8192);
 
 #define INPUT_DEVICE        "inputDevice"
 #define OUTPUT_DEVICE       "outputDevice"
@@ -165,12 +173,14 @@ void setup() {
     spiPort|=((1<<3)|(1<<9)|(1<<15)|(1<<20)|(1<<26));   // setting the micro stepping to quarter step
 
     async({
-      vTaskDelay(10000);
+      vTaskDelay(15000);
       web::service webServer(90,"/");
       webServer.onData([&](uint8_t *data){
+        MEMORY[EXECUTABLE_OBJECT]=addToObject(data,statusLabel,"value");
+
         console.log("data >> ",data);
-        webServer.send(data);
-        webServer.httpSetResponse(data);
+        webServer.send((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
+        webServer.httpSetResponse((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
       });
       vTaskDelay(-1UL);
       // for(;;)vTaskDelay(1500000);
