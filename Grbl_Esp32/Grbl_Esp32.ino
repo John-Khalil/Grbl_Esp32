@@ -27,6 +27,40 @@
 #include "src/Pins.h"
 #include "src/custom/webService.h"
 
+#include "src/custom/pointerTool.h"
+
+
+// #include "src/custom/consoleLogger.h"
+// #include "src/custom/consoleLogger.cpp"
+// #include "src/custom/highLevelMemory.cpp"
+// #include "src/custom/pointerTool.h"
+// #include "src/custom/constDefinitions.h"
+// #include "src/custom/eepromBasicConfig.h"
+// #include "src/custom/networkUtils.h"
+// #include "src/custom/platform.h"
+// #include "src/custom/http.h"
+// #include "src/custom/webService.h"
+// #include"src/custom/fetch.h"
+
+
+//^ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include "src/custom/highLevelMemory.cpp"
+
+utils::highLevelMemory MEMORY(20000);
+
+#define INPUT_DEVICE        "inputDevice"
+#define OUTPUT_DEVICE       "outputDevice"
+#define MOTION_CONTROLLER   "motionController"
+#define THREAD              "thread"
+
+void operatorCallbackSetup(void){
+  // constJson();
+  return;
+}
+
+
+//^ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 void setup() {
@@ -39,6 +73,7 @@ void setup() {
     });
 
     console.log("code just started");
+    operatorCallbackSetup();
 
     #define shiftRegisterClkPin   12
     #define shiftRegisterDataPin  27
