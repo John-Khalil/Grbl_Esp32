@@ -62,6 +62,9 @@ uint8_t *addToObject(uint8_t* userObjectStr,std::string newKey,std::string newVa
   return (uint8_t*)(userObject+="\""+newKey+"\""+":"+"\""+newValue+"\"}").c_str();
 }
 
+#define $JSON(REQUESTED_JSON,JSON_STRING) std::string((char*)constJson((uint8_t*)REQUESTED_JSON,(uint8_t*)JSON_STRING))
+
+
 
 //^ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -189,11 +192,19 @@ void setup() {
       web::service webServer(90,"/");
       webServer.onData([&](uint8_t *data){
         MEMORY["test"]="random value";
-        MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"value");
+        MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"ok");
 
+        if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==INPUT_DEVICE){
+          if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined")
+            MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],ACK,OUTPUT_ACK);
+          MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],INPUT_VALUE,(uint8_t*)(MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]|="UNDEFINED"));
+        }
+        else if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==OUTPUT_DEVICE){
+          if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined")
+            MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],ACK,OUTPUT_ACK);
+          MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]=MEMORY[EXECUTABLE_OBJECT];
+        }
 
-
-        MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"value");
 
         webServer.send((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
         webServer.httpSetResponse((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
