@@ -95,7 +95,13 @@ utils::highLevelMemory MEMORY(4096);
 
 void operatorCallbackSetup(void){
   // constJson();
-  
+
+  MEMORY["test0"]>>[&](uint8_t* data){
+    MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],"testOutput","thats awsome");
+  };
+  MEMORY["test0"]<<[&](){
+    MEMORY["test0"]="manga";
+  };
   return;
 }
 
@@ -197,11 +203,14 @@ void setup() {
         if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==INPUT_DEVICE){
           if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined")
             MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],ACK,OUTPUT_ACK);
-          MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],INPUT_VALUE,(uint8_t*)(MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]|="UNDEFINED"));
+          
+          MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]|="UNDEFINED";
+          MEMORY[EXECUTABLE_OBJECT]=addToObject(MEMORY[EXECUTABLE_OBJECT],INPUT_VALUE,(MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]));
         }
         else if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==OUTPUT_DEVICE){
           if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined")
             MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],ACK,OUTPUT_ACK);
+          
           MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]=MEMORY[EXECUTABLE_OBJECT];
         }
 
