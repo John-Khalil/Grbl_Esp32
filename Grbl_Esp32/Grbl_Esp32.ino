@@ -56,10 +56,16 @@
 
 
 
-uint8_t *addToObject(uint8_t* userObjectStr,std::string newKey,std::string newValue){
+// uint8_t *addToObject(uint8_t* userObjectStr,std::string newKey,std::string newValue){
+//   std::string userObject=(char*)userObjectStr;
+//   userObject[userObject.length()-1]=',';    // replace '}' with ',' 0x2c
+//   return (uint8_t*)(userObject+="\""+newKey+"\""+":"+"\""+newValue+"\"}").c_str();
+// }
+
+std::string addToObject(uint8_t* userObjectStr,std::string newKey,std::string newValue){
   std::string userObject=(char*)userObjectStr;
   userObject[userObject.length()-1]=',';    // replace '}' with ',' 0x2c
-  return (uint8_t*)(userObject+="\""+newKey+"\""+":"+"\""+newValue+"\"}").c_str();
+  return (userObject+="\""+newKey+"\""+":"+"\""+newValue+"\"}");
 }
 
 #define $JSON(REQUESTED_JSON,JSON_STRING) std::string((char*)constJson((uint8_t*)REQUESTED_JSON,(uint8_t*)JSON_STRING))
@@ -96,12 +102,12 @@ utils::highLevelMemory MEMORY(4096);
 void operatorCallbackSetup(void){
   // constJson();
 
-  MEMORY["test0"]>>[&](uint8_t* data){
-    MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],"testOutput","thats awsome");
-  };
-  MEMORY["test0"]<<[&](){
-    MEMORY["test0"]="manga";
-  };
+  // MEMORY["test0"]>>[&](uint8_t* data){
+  //   MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],"testOutput","thats awsome");
+  // };
+  // MEMORY["test0"]<<[&](){
+  //   MEMORY["test0"]="manga";
+  // };
   return;
 }
 
@@ -197,15 +203,26 @@ void setup() {
       vTaskDelay(15000);
       web::service webServer(90,"/");
       webServer.onData([&](uint8_t *data){
-        MEMORY["test"]="random value";
-        MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"ok");
+        std::string genericBuffer=addToObject(data,STATUS_LABEL,"ok");
+        MEMORY[EXECUTABLE_OBJECT]=genericBuffer;
+        console.log("1 >> ",(char*)MEMORY[EXECUTABLE_OBJECT]);
 
         if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==INPUT_DEVICE){
-          if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined")
-            MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],ACK,OUTPUT_ACK);
+          if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined"){
+            console.log("11 >> ",(char*)MEMORY[EXECUTABLE_OBJECT]);
+            // genericBuffer=MEMORY[EXECUTABLE_OBJECT];
+            genericBuffer=addToObject((uint8_t*)genericBuffer.c_str(),ACK,OUTPUT_ACK);
+            MEMORY[EXECUTABLE_OBJECT]=genericBuffer;
+          }
           
-          MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]|="UNDEFINED";
-          MEMORY[EXECUTABLE_OBJECT]=addToObject(MEMORY[EXECUTABLE_OBJECT],INPUT_VALUE,(MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]));
+          console.log("2 >> ",(char*)MEMORY[EXECUTABLE_OBJECT]);
+          
+          // MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]|="UNDEFINED";
+          // console.log("3 >> ",(char*)MEMORY[EXECUTABLE_OBJECT]);
+          // genericBuffer=MEMORY[EXECUTABLE_OBJECT];
+          genericBuffer=addToObject((uint8_t*)genericBuffer.c_str(),INPUT_VALUE,(MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]));
+          MEMORY[EXECUTABLE_OBJECT]=genericBuffer;
+          console.log("4 >> ",(char*)MEMORY[EXECUTABLE_OBJECT]);
         }
         else if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==OUTPUT_DEVICE){
           if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined")
