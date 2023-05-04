@@ -97,11 +97,9 @@ void operatorCallbackSetup(void){
   // constJson();
 
   MEMORY["test0"]>>[&](uint8_t* data){
-    console.log("write trig");
     MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],"testOutput","thats awsome");
   };
   MEMORY["test0"]<<[&](){
-    console.log("READ TRIG");
     MEMORY["test0"]="manga";
   };
   return;
@@ -212,7 +210,6 @@ void setup() {
           MEMORY[EXECUTABLE_OBJECT]=addToObject(MEMORY[EXECUTABLE_OBJECT],INPUT_VALUE,res);
         }
         else if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==OUTPUT_DEVICE){
-          console.log("invalid scope");
           if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined")
             MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],ACK,OUTPUT_ACK);
           
