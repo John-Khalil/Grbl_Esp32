@@ -135,7 +135,11 @@ void operatorCallbackSetup(void){
   //   MEMORY["test0"]="manga";
   // };
 
-  
+  MEMORY[ANALOG_INPUT]<<[&](){
+    if($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT])!="undefined")
+      MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],"test read value",(char*)(inttostring(analogRead(getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()))))));
+      // MEMORY[ANALOG_INPUT]=inttostring(analogRead(getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()))));
+  };
 
   return;
 }
