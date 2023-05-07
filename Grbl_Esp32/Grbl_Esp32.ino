@@ -30,6 +30,33 @@
 #include "src/custom/pointerTool.h"
 
 
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
+
+
+
+Adafruit_PWMServoDriver servoModules[]={Adafruit_PWMServoDriver(0x40),Adafruit_PWMServoDriver(0x41)};
+#define SERVOMIN  125 // this is the 'minimum' pulse length count (out of 4096)
+#define SERVOMAX  650 // this is the 'maximum' pulse length count (out of 4096)
+
+
+
+
+
+void setServo(uint16_t servoMotor,uint16_t angle){
+  static uint8_t firstRun;
+  if(!firstRun){
+    for(auto &servoModule:servoModules){
+      servoModule.begin();
+      servoModule.setPWMFreq(60);
+    }
+    firstRun =1;
+  }
+  servoModules[servoMotor/16].setPWM((servoMotor%16),0,map(angle,0, 180, SERVOMIN,SERVOMAX));
+  return;
+}
+
+
 // #include "src/custom/consoleLogger.h"
 // #include "src/custom/consoleLogger.cpp"
 // #include "src/custom/highLevelMemory.cpp"
@@ -48,6 +75,8 @@
 #define OPERATOR      "operator"
 #define ID            "ID"
 #define ACK           "ack"
+#define CHANNEL       "ch"
+#define VALUE         "value"
 
 #define THREAD_ACK            "THREAD_ACK"
 #define INPUT_VALUE           "INPUT_VALUE"
@@ -82,12 +111,15 @@ utils::highLevelMemory MEMORY(4096);
 #define INPUT_REGISTER_1  "inputRegister1"
 #define OUTPUT_REGISTER_0 "outputRegister0"
 #define OUTPUT_REGISTER_1 "outputRegister1"
+#define PWM               "pwm"
+
 
 #define ANALOG_INPUT      "analogInput"
 #define DIGITAL_INPUT     "digitalInput"
 #define DIGITAL_OUTPUT    "digitalOutput"
 #define SERVO_CONTROL     "servoControl"
 #define CLOCK_OUTPUT      "clockOutput"
+
 
 #define EXTENDED_OUTPUT   "extendedOutput"
 
@@ -96,12 +128,15 @@ utils::highLevelMemory MEMORY(4096);
 void operatorCallbackSetup(void){
   // constJson();
 
-  MEMORY["test0"]>>[&](uint8_t* data){
-    MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],"testOutput","thats awsome");
-  };
-  MEMORY["test0"]<<[&](){
-    MEMORY["test0"]="manga";
-  };
+  // MEMORY["test0"]>>[&](uint8_t* data){
+  //   MEMORY[EXECUTABLE_OBJECT]=addToObject(data,"testOutput","thats awsome");
+  // };
+  // MEMORY["test0"]<<[&](){
+  //   MEMORY["test0"]="manga";
+  // };
+
+  
+
   return;
 }
 

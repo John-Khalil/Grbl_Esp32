@@ -43,9 +43,9 @@
 #define USE_I2S_STEPS
 //#define DEFAULT_STEPPER ST_I2S_STATIC
 
-#define I2S_OUT_BCK             GPIO_NUM_22
-#define I2S_OUT_WS              GPIO_NUM_4
-#define I2S_OUT_DATA            GPIO_NUM_21
+// #define I2S_OUT_BCK             GPIO_NUM_22
+// #define I2S_OUT_WS              GPIO_NUM_4
+// #define I2S_OUT_DATA            GPIO_NUM_21
 
 // #define CUSTOM_CODE_FILENAME    "../Custom/CoreXY.cpp"
 
