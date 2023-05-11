@@ -136,9 +136,14 @@ void operatorCallbackSetup(void){
   // };
 
   MEMORY[ANALOG_INPUT]<<[&](){
-    if($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT])!="undefined")
-      MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],"test read value",(char*)(inttostring(analogRead(getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()))))));
-      // MEMORY[ANALOG_INPUT]=inttostring(analogRead(getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()))));
+    if($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT])!="undefined"){
+      // MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],"test read value",(char*)(inttostring(analogRead(getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()))))));
+      // MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],"test read value",(char*)(inttostring(556)));
+      unsigned char *buffer=inttostring(analogRead(getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()))));
+      MEMORY[ANALOG_INPUT]=buffer;
+      // console.log(" -->> ",analogRead(36));
+      // MEMORY[ANALOG_INPUT]=inttostring(4095);
+    }
   };
 
   return;
@@ -149,7 +154,7 @@ void operatorCallbackSetup(void){
 
 
 void setup() {
-    Serial2.begin(500000);
+    Serial2.begin(250000);
     console.addConsole([&](unsigned char *cosnoleData,unsigned char autoNLCR){
       if(autoNLCR)
         Serial2.println((char*)cosnoleData);
@@ -157,8 +162,8 @@ void setup() {
         Serial2.print((char*)cosnoleData);
     });
 
-    console.log("code just started");
     operatorCallbackSetup();
+    console.log("code just started");
 
     #define shiftRegisterClkPin   12
     #define shiftRegisterDataPin  27
