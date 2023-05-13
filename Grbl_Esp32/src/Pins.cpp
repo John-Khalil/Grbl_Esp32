@@ -38,7 +38,7 @@ void IRAM_ATTR digitalWrite(uint8_t pin, uint8_t val) {
     spiPort.write((pin-I2S_OUT_PIN_BASE),val);
 #ifdef USE_I2S_OUT
 
-    i2s_out_write(pin - I2S_OUT_PIN_BASE, val);
+    // i2s_out_write(pin - I2S_OUT_PIN_BASE, val);
 #endif
 }
 
@@ -62,7 +62,7 @@ int IRAM_ATTR digitalRead(uint8_t pin) {
         return __digitalRead(pin);
     }
 #ifdef USE_I2S_OUT
-    return i2s_out_read(pin - I2S_OUT_PIN_BASE);
+    // return i2s_out_read(pin - I2S_OUT_PIN_BASE);
 #else
     return 0;
 #endif

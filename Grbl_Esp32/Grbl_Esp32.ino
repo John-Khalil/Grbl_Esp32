@@ -135,6 +135,14 @@ void operatorCallbackSetup(void){
   //   MEMORY["test0"]="manga";
   // };
 
+  MEMORY[SERVO_CONTROL]>>[&](unsigned char *data){
+    if($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT])!="undefined"){
+      uint32_t servoChannel=getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()));
+      uint32_t servoAngle=getInt32_t((uint8_t*)($JSON(VALUE,MEMORY[EXECUTABLE_OBJECT]).c_str()));
+      setServo(servoChannel,servoAngle);
+    }
+  };
+
   MEMORY[ANALOG_INPUT]<<[&](){
     if($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT])!="undefined"){
       // MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],"test read value",(char*)(inttostring(analogRead(getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()))))));
@@ -173,6 +181,7 @@ void setup() {
     _PM(shiftRegisterClkPin,OUTPUT);
     _PM(shiftRegisterDataPin,OUTPUT);
     _PM(shiftRegisterLatchPin,OUTPUT);
+    setServo(31,60);
 
     // spiPort.passThrough([&](uint16_t pinNumber,uint8_t pinState,uint64_t outputValue){
     //   console.log(">> ",pinNumber,">> ",pinState,">> ",(uint16_t)outputValue);
