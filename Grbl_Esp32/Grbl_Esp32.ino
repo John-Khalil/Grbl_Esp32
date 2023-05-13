@@ -181,7 +181,7 @@ void setup() {
     _PM(shiftRegisterClkPin,OUTPUT);
     _PM(shiftRegisterDataPin,OUTPUT);
     _PM(shiftRegisterLatchPin,OUTPUT);
-    setServo(31,60);
+    setServo(15,60);
 
     // spiPort.passThrough([&](uint16_t pinNumber,uint8_t pinState,uint64_t outputValue){
     //   console.log(">> ",pinNumber,">> ",pinState,">> ",(uint16_t)outputValue);
