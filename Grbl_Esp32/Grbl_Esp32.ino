@@ -100,6 +100,8 @@ uint8_t *addToObject(uint8_t* userObjectStr,std::string newKey,std::string newVa
 #include "src/custom/highLevelMemory.cpp"
 
 utils::highLevelMemory MEMORY(4096);
+web::service webServer;
+
 
 #define INPUT_DEVICE        "inputDevice"
 #define OUTPUT_DEVICE       "outputDevice"
@@ -246,35 +248,35 @@ void setup() {
     );
     spiPort|=((1<<3)|(1<<9)|(1<<15)|(1<<20)|(1<<26));   // setting the micro stepping to quarter step
 
+
+    webServer.onData([&](uint8_t *data){
+      MEMORY["test"]="random value";
+      MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"ok");
+
+      if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==INPUT_DEVICE){
+        console.log((char*)MEMORY[EXECUTABLE_OBJECT]);
+        
+        // MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]|="UNDEFINED";
+        // std::string testSTr=MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])];
+        // console.log(testSTr);
+        std::string res=MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])];
+        MEMORY[EXECUTABLE_OBJECT]=addToObject(MEMORY[EXECUTABLE_OBJECT],INPUT_VALUE,res);
+      }
+      else if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==OUTPUT_DEVICE){
+        if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined")
+          MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],ACK,OUTPUT_ACK);
+        
+        MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]=MEMORY[EXECUTABLE_OBJECT];
+      }
+
+
+      webServer.send((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
+      webServer.httpSetResponse((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
+    });
+
     async({
       vTaskDelay(15000);
-      web::service webServer(90,"/");
-      webServer.onData([&](uint8_t *data){
-        MEMORY["test"]="random value";
-        MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"ok");
-
-        if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==INPUT_DEVICE){
-          console.log((char*)MEMORY[EXECUTABLE_OBJECT]);
-          
-          // MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]|="UNDEFINED";
-          // std::string testSTr=MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])];
-          // console.log(testSTr);
-          std::string res=MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])];
-          MEMORY[EXECUTABLE_OBJECT]=addToObject(MEMORY[EXECUTABLE_OBJECT],INPUT_VALUE,res);
-        }
-        else if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==OUTPUT_DEVICE){
-          if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined")
-            MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],ACK,OUTPUT_ACK);
-          
-          MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]=MEMORY[EXECUTABLE_OBJECT];
-        }
-
-
-        webServer.send((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
-        webServer.httpSetResponse((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
-      });
-      vTaskDelay(-1UL);
-      // for(;;)vTaskDelay(1500000);
+      webServer.setup(90,"/");
     });
 
 

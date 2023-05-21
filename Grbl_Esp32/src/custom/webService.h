@@ -151,6 +151,11 @@ class service{
             return (*this);
         }
 
+        service &setup(uint16_t port,char* path="/"){
+            setup(port,(uint8_t*)path);
+            return (*this);
+        }
+
         service(uint16_t port,uint8_t* path=(uint8_t*)"/"){
             setup(port,path);
         }
@@ -161,6 +166,10 @@ class service{
 
         service(uint16_t port,std::string path="/"){
             setup(port,(uint8_t*)path.c_str());
+        }
+
+        service(){
+            
         }
 
         ~service(){
