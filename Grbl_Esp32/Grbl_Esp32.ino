@@ -101,6 +101,7 @@ uint8_t *addToObject(uint8_t* userObjectStr,std::string newKey,std::string newVa
 
 utils::highLevelMemory MEMORY(4096);
 web::service webServer;
+extendedPort extendedOutput;
 
 
 #define INPUT_DEVICE        "inputDevice"
@@ -128,6 +129,34 @@ web::service webServer;
 #define EXECUTABLE_OBJECT "executableObject"
 
 void operatorCallbackSetup(void){
+
+  #define extendedOutputClkPin   4
+  #define extendedOutputDataPin  15
+  #define extendedOutputLatchPin 2
+  
+  _PM(extendedOutputClkPin,OUTPUT);
+  _PM(extendedOutputDataPin,OUTPUT);
+  _PM(extendedOutputLatchPin,OUTPUT);
+
+
+  extendedOutput.setup(
+  [&](uint8_t clkPin){
+    _DW(extendedOutputClkPin,clkPin);
+  },
+  [&](uint8_t dataPin){
+    _DW(extendedOutputDataPin,dataPin);
+  },
+  [&](uint8_t latchPin){
+    _DW(extendedOutputLatchPin,latchPin);
+  },
+  [&](float microSec){
+    
+  });
+
+
+
+
+
   // constJson();
 
   // MEMORY["test0"]>>[&](uint8_t* data){
@@ -137,11 +166,38 @@ void operatorCallbackSetup(void){
   //   MEMORY["test0"]="manga";
   // };
 
+
+
+
   MEMORY[SERVO_CONTROL]>>[&](unsigned char *data){
     if($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT])!="undefined"){
       uint32_t servoChannel=getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()));
       uint32_t servoAngle=getInt32_t((uint8_t*)($JSON(VALUE,MEMORY[EXECUTABLE_OBJECT]).c_str()));
       setServo(servoChannel,servoAngle);
+    }
+  };
+
+  MEMORY[DIGITAL_OUTPUT]>>[&](unsigned char *data){
+    if($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT])!="undefined"){
+      uint32_t channel=getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()));
+      uint32_t outputValue=getInt32_t((uint8_t*)($JSON(VALUE,MEMORY[EXECUTABLE_OBJECT]).c_str()));
+      switch((channel>>7)&0x03){
+        case 0:
+          _DW((channel&0x7F),(outputValue!=0));
+          break;
+        case 1:
+          if(channel&0x200)
+            spiPort.write(outputValue);
+          else
+            spiPort.write((channel&0x7F),outputValue);
+          break;
+        case 2:
+          if(channel&0x200)
+            extendedOutput.write(outputValue);
+          else
+            extendedOutput.write((channel&0x7F),outputValue);
+          break;
+      }
     }
   };
 
@@ -154,7 +210,7 @@ void operatorCallbackSetup(void){
       // console.log(" -->> ",analogRead(36));
       // MEMORY[ANALOG_INPUT]=inttostring(4095);
     }
-  };
+  }; 
 
   return;
 }
