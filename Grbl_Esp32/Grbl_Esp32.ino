@@ -77,6 +77,7 @@ void setServo(uint16_t servoMotor,uint16_t angle){
 #define ACK           "ack"
 #define CHANNEL       "ch"
 #define VALUE         "value"
+#define CLOCK_EDGE    "clockEdge"
 
 #define THREAD_ACK            "THREAD_ACK"
 #define INPUT_VALUE           "INPUT_VALUE"
@@ -167,6 +168,19 @@ void operatorCallbackSetup(void){
   // };
 
 
+  MEMORY[CLOCK_OUTPUT]>>[&](unsigned char *data){
+    if($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT])!="undefined"){
+      uint32_t channel=getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()));
+      uint32_t delay=getInt32_t((uint8_t*)($JSON(VALUE,MEMORY[EXECUTABLE_OBJECT]).c_str()));
+      uint32_t clockEdge=getInt32_t((uint8_t*)($JSON(CLOCK_EDGE,MEMORY[EXECUTABLE_OBJECT]).c_str()));
+      while(clockEdge--){
+        extendedOutput.write(extendedOutput.outputValue^(1<<channel));
+        vTaskDelay(delay);
+      }
+
+
+    }
+  };
 
 
   MEMORY[SERVO_CONTROL]>>[&](unsigned char *data){
@@ -217,6 +231,33 @@ void operatorCallbackSetup(void){
 
 
 //^ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void onDataAsync(void *param){
+  uint8_t *data=(uint8_t*)param;
+  MEMORY["test"]="random value";
+  MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"ok");
+
+  if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==INPUT_DEVICE){
+    console.log((char*)MEMORY[EXECUTABLE_OBJECT]);
+    
+    // MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]|="UNDEFINED";
+    // std::string testSTr=MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])];
+    // console.log(testSTr);
+    std::string res=MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])];
+    MEMORY[EXECUTABLE_OBJECT]=addToObject(MEMORY[EXECUTABLE_OBJECT],INPUT_VALUE,res);
+  }
+  else if($JSON(OPERATOR,MEMORY[EXECUTABLE_OBJECT])==OUTPUT_DEVICE){
+    if($JSON(ACK,MEMORY[EXECUTABLE_OBJECT])=="undefined")
+      MEMORY[EXECUTABLE_OBJECT]=addToObject((uint8_t*)MEMORY[EXECUTABLE_OBJECT],ACK,OUTPUT_ACK);
+    
+    MEMORY[$JSON(ID,MEMORY[EXECUTABLE_OBJECT])]=MEMORY[EXECUTABLE_OBJECT];
+  }
+
+
+  webServer.send((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
+  webServer.httpSetResponse((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
+  return;
+}
 
 
 void setup() {
@@ -306,6 +347,9 @@ void setup() {
 
 
     webServer.onData([&](uint8_t *data){
+
+      // xTaskCreate(onDataAsync,"async-task",30000,data,0,NULL);
+
       MEMORY["test"]="random value";
       MEMORY[EXECUTABLE_OBJECT]=addToObject(data,STATUS_LABEL,"ok");
 
@@ -328,6 +372,8 @@ void setup() {
 
       webServer.send((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
       webServer.httpSetResponse((uint8_t*)MEMORY[EXECUTABLE_OBJECT]);
+
+
     });
 
     async({
