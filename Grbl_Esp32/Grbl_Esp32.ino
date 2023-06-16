@@ -173,10 +173,13 @@ void operatorCallbackSetup(void){
       uint32_t channel=getInt32_t((uint8_t*)($JSON(CHANNEL,MEMORY[EXECUTABLE_OBJECT]).c_str()));
       uint32_t delay=getInt32_t((uint8_t*)($JSON(VALUE,MEMORY[EXECUTABLE_OBJECT]).c_str()));
       uint32_t clockEdge=getInt32_t((uint8_t*)($JSON(CLOCK_EDGE,MEMORY[EXECUTABLE_OBJECT]).c_str()));
+      uint8_t oddClocks=clockEdge&1;
       while(clockEdge--){
         extendedOutput.write(extendedOutput.outputValue^(1<<channel));
         vTaskDelay(delay);
       }
+      if(oddClocks)
+        extendedOutput.write(extendedOutput.outputValue^(1<<channel));
 
 
     }
